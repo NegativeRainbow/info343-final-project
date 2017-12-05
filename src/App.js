@@ -1,18 +1,57 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import Card from './Card';
 
 class App extends Component {
+
+  onLike() {
+
+  }
+
+  onNope() {
+
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      pets:
+        [
+          {
+            "name": "Fido",
+            "sex": "Male",
+            "breed": "Mix",
+            "images": ["img/069b8257-f9db-4034-908f-12b8cea76693.jpg",
+              "img/00654c82-4df9-418f-b5f1-c6d094457f1f.jpg",
+              "img/7683254c-debd-4d9c-b0ef-7861d7ad0cd5.jpg"
+            ],
+            "bio": "1 gud boi. No Hookups"
+          },
+          {
+            "name": "Spot",
+            "sex": "Female",
+            "breed": "Terrier",
+            "images": ["img/78e41dd3-4216-47f1-9598-ea8220de354b.jpg",
+              "img/867df82c-1b72-495e-a349-7c067c700132.jpg",
+              "img/f4456b54-3c2c-4024-adc2-04fc19c5561b.jpg"
+            ],
+            "bio": "I may be a Terrier but I sure ain't Terrierfying"
+          }]
+    };
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div>
+        <header>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <main>
+          <div className="container">
+            <Card dog={this.state.pets[1]} />
+          </div>
+        </main>
       </div>
     );
   }
