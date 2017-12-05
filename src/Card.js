@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { UncontrolledCarousel } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite';
 
+const likeAnimation = {
+    'from': {transform: 'rotate(10deg)', opacity: 1 },
+    'to': { transform: 'rotate(65deg)', opacity: 0 },
+  };
+  
+const nopeAnimation = {
+    'from': {transform: 'rotate(-10deg)', opacity: 1 },
+    'to': {transform: 'rotate(-65deg)', opacity: 0 },
+  };
+
 const styles = StyleSheet.create({
     btnLike: {
         fontSize: 24,
@@ -23,16 +33,31 @@ const styles = StyleSheet.create({
         backgroundColor: '#ff0000'
 
     },
+    cardNope: {
+        animationName: nopeAnimation,
+        animationDuration: '1s',
+    },
+    cardLike: {
+        animationName: likeAnimation,
+        animationDuration: '1s',
+    },
+    cardStandard: {
+        height: '475px'
+    }
 }
 )
 
 export default class Card extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         //TO-DO:
         // Grab current dog object (or current profile) from firebase
         // If empty (no object), display "No More Users in Area" message
         // Create carousal pictures
-
         let dogObj = this.props.dog;
 
         let carouselItems = dogObj.images.map(function (img) {
@@ -40,10 +65,14 @@ export default class Card extends Component {
             return obj;
         })
 
-
+        let cardAnimation = css(
+            styles.cardStandard,
+            this.props.liked && styles.cardLike,
+            this.props.disliked && styles.cardNope
+        );
         return (
             <div className='d-flex justify-content-center'>
-                <div className="card" /*onClick={() => this.handleClick()}*/>
+                <div className={"card " + cardAnimation}>
                     <div className="card-body">
                         <div className="container">
                             <UncontrolledCarousel
@@ -56,10 +85,10 @@ export default class Card extends Component {
                         <p className='card-text'>{dogObj.bio}</p>
                         <div className='row'>
                             <div className='col text-left'>
-                                <button className={css(styles.btnLike, styles.btnNope)} >X</button>
+                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => this.props.onNopeCallback(event)}>X</button>
                             </div>
                             <div className='col text-right'>
-                                <button className={css(styles.btnLike)}>{'<3'}</button>
+                                <button className={css(styles.btnLike)} onClick={(event) => this.props.onLikeCallback(event)}>{'<3'}</button>
                             </div>
                         </div>
                     </div>

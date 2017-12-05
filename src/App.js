@@ -6,13 +6,6 @@ import Card from './Card';
 
 class App extends Component {
 
-  onLike() {
-
-  }
-
-  onNope() {
-
-  }
 
   constructor(props) {
     super(props);
@@ -38,9 +31,20 @@ class App extends Component {
               "img/f4456b54-3c2c-4024-adc2-04fc19c5561b.jpg"
             ],
             "bio": "I may be a Terrier but I sure ain't Terrierfying"
-          }]
+          }],
     };
   }
+
+
+  onLike(event) {
+    this.setState({liked: true});
+    console.log('liked');
+}
+
+  onNope(event) {
+    this.setState({disliked: true});
+    console.log('nope');
+}
 
   render() {
     return (
@@ -49,7 +53,11 @@ class App extends Component {
         </header>
         <main>
           <div className="container">
-            <Card dog={this.state.pets[1]} />
+            <Card dog={this.state.pets[1]} 
+                  onLikeCallback={(event) => this.onLike(event)} 
+                  onNopeCallback={(event) => this.onNope(event)} 
+                  liked={this.state.liked}
+                  disliked={this.state.disliked}/>
           </div>
         </main>
       </div>
