@@ -31,7 +31,17 @@ class App extends Component {
               "img/f4456b54-3c2c-4024-adc2-04fc19c5561b.jpg"
             ],
             "bio": "I may be a Terrier but I sure ain't Terrierfying"
-          }],
+          },
+        {
+          "name": "Cody",
+          "sex": "Male",
+          "breed": "Toy Poodle",
+          "images": 
+           ["img/cody3.jpg", 
+            "img/cody2.jpg",
+            "img/cody4.jpg"],
+          "bio": "I am dumb and cute"
+        }],
     };
   }
 
@@ -46,6 +56,11 @@ class App extends Component {
     console.log('nope');
 }
 
+  onSwitch(event) {
+    this.setState({ownder: true});
+    console.log('swapped');
+  }
+
   render() {
     return (
       <div>
@@ -53,9 +68,10 @@ class App extends Component {
         </header>
         <main>
           <div className="container">
-            <Card dog={this.state.pets[1]} 
+            <Card dog={this.state.pets[2]} 
                   onLikeCallback={(event) => this.onLike(event)} 
-                  onNopeCallback={(event) => this.onNope(event)} 
+                  onNopeCallback={(event) => this.onNope(event)}
+                  onSwitchCallback={(event) => this.onSwitch(event)}
                   liked={this.state.liked}
                   disliked={this.state.disliked}/>
           </div>

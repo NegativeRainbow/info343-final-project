@@ -27,6 +27,27 @@
   to { transform: rotate(360deg); }
 }
 
+@font-face {
+  font-family: "good";
+  src: url("good.ttf");
+
+}
+
+@font-face {
+  font-family: "summer";
+  src: url("summer.ttf");
+}
+
+@font-face {
+  font-family: "catndog";
+  src: url("catndog.ttf");
+}
+
+@font-face {
+  font-family: "puppy";
+  src: url("PuppyBellies.ttf");
+}
+
 .carousel img {
   min-width: 100%;
   max-height: 100%;
@@ -35,9 +56,25 @@
   margin: 0 auto;
 }
 
+.breed {
+  font-family: "good";
+  font-size: 36px;
+}
+
+.name {
+  font-size: 64px;
+  font-family: "puppy";
+}
+
+.bio {
+  font-size: 30px;
+  font-family: "puppy";
+}
+
 .profileCard {
   max-width: 500px;
   object-fit: contain;
+  font-family: "Scrap-Cat-n-Dog";
 }
 
 

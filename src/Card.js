@@ -6,12 +6,12 @@ import { StyleSheet, css } from 'aphrodite';
 
 const likeAnimation = {
     'from': { transform: 'rotate(10deg)', opacity: 1, left: '0px', top: '0px' },
-    'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '150px' }
+    'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '300px' }
 };
 
 const nopeAnimation = {
     'from': { transform: 'rotate(-10deg)', opacity: 1, right: '0px', top: '0px' },
-    'to': { transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '150px' },
+    'to': { transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '300px' },
 };
 
 // Button URLS from https://codepen.io/arjentienkamp/
@@ -85,7 +85,7 @@ export default class Card extends Component {
         return (
             <div className="d-flex justify-content-center">
                 <div className={"card profileCard " + cardAnimation}>
-                    <UncontrolledCarousel className={'text-center'}
+                    <UncontrolledCarousel
                         items={carouselItems}
                         indicators={true}
                         controls={true}
@@ -93,11 +93,9 @@ export default class Card extends Component {
                         <CarouselItem cssModule={{width: '100%'}}/>
                     </UncontrolledCarousel>
                     <div className="card-body">
-
-
-                        <h3 className="card-title">{dogObj.name}</h3>
-                        <p className="card-text">{dogObj.sex + ' ' + dogObj.breed}</p>
-                        <p className='card-text'>{dogObj.bio}</p>
+                        <h3 className="card-title name">{dogObj.name + ', 5'}</h3>
+                        <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
+                        <p className='card-text bio'>{dogObj.bio}</p>
                         <div className='row'>
                             <div className='col justify-content-center'>
                                 <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => this.props.onNopeCallback(event)}></button>
