@@ -27,4 +27,23 @@
   to { transform: rotate(360deg); }
 }
 
+.carousel img {
+  min-width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
 
+.profileCard {
+  max-width: 500px;
+  object-fit: contain;
+}
+
+
+.carousel-inner {
+  min-width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}

@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { UncontrolledCarousel } from 'reactstrap';
+import './App.css';
+import { UncontrolledCarousel, CarouselItem } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite';
 
-const likeAnimation = {
-    'from': {transform: 'rotate(10deg)', opacity: 1, left: '0px', top: '0px' },
-    'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '150px' }
-  };
-  
-const nopeAnimation = {
-    'from': {transform: 'rotate(-10deg)', opacity: 1, right: '0px', top: '0px' },
-    'to': {transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '150px' },
-  };
 
-  // Button URLS from https://codepen.io/arjentienkamp/
+const likeAnimation = {
+    'from': { transform: 'rotate(10deg)', opacity: 1, left: '0px', top: '0px' },
+    'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '150px' }
+};
+
+const nopeAnimation = {
+    'from': { transform: 'rotate(-10deg)', opacity: 1, right: '0px', top: '0px' },
+    'to': { transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '150px' },
+};
+
+// Button URLS from https://codepen.io/arjentienkamp/
 const styles = StyleSheet.create({
     btnLike: {
         fontSize: 24,
@@ -54,14 +56,6 @@ const styles = StyleSheet.create({
     cardLike: {
         animationName: likeAnimation,
         animationDuration: '1s',
-    },
-    carousel: {
-        display: 'block',
-        margin: 'auto',
-        border: '1px solid #a6a9aa',
-        borderRadius: '8px',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
     }
 }
 )
@@ -89,13 +83,17 @@ export default class Card extends Component {
             this.props.disliked && styles.cardNope
         );
         return (
-            <div className='d-flex justify-content-center'>
-                <div className={"card " + cardAnimation}>
+            <div className="d-flex justify-content-center">
+                <div className={"card profileCard " + cardAnimation}>
+                    <UncontrolledCarousel className={'text-center'}
+                        items={carouselItems}
+                        indicators={true}
+                        controls={true}
+                        autoPlay={false}>
+                        <CarouselItem cssModule={{width: '100%'}}/>
+                    </UncontrolledCarousel>
                     <div className="card-body">
-                            <UncontrolledCarousel className={css(styles.carousel)}
-                                items={carouselItems}
-                                indicators={false}
-                                controls={true} />
+
 
                         <h3 className="card-title">{dogObj.name}</h3>
                         <p className="card-text">{dogObj.sex + ' ' + dogObj.breed}</p>
@@ -106,7 +104,7 @@ export default class Card extends Component {
                             </div>
                             <div className='col justify-content-center'>
                                 <button className={css(styles.btnLike, styles.btnOwner)}></button>
-                                </div>
+                            </div>
                             <div className='col justify-content-center'>
                                 <button className={css(styles.btnLike)} onClick={(event) => this.props.onLikeCallback(event)}></button>
                             </div>
