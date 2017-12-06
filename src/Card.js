@@ -118,7 +118,7 @@ export default class Card extends Component {
                         <CarouselItem cssModule={{width: '100%'}}/>
                     </UncontrolledCarousel>
                     <div className="card-body">
-                        <h3 className="card-title name">{dogObj.name + ', 5'}</h3>
+                        <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
                         <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
                         <p className='card-text bio'>{dogObj.bio}</p>
                         <div className='row'>
