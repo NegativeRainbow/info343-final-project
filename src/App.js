@@ -50,6 +50,7 @@ class App extends Component {
             "img/cody4.jpg"],
           "bio": "I am dumb and cute"
         }],
+        currentPet: 0
     };
   }
 
@@ -79,12 +80,12 @@ class App extends Component {
 
 
   onLike(event) {
-    this.setState({liked: true});
+    this.setState({liked: true, currentPet: this.state.currentPet + 1});
     console.log('liked');
 }
 
   onNope(event) {
-    this.setState({disliked: true});
+    this.setState({disliked: true, currentPet: this.state.currentPet + 1});
     console.log('nope');
 }
 
@@ -102,7 +103,7 @@ class App extends Component {
         </header>
         <main>
           <div className="container">
-            <Card dog={this.state.pets[2]} 
+            <Card dog={this.state.pets[this.state.currentPet]} 
                   onLikeCallback={(event) => this.onLike(event)} 
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
