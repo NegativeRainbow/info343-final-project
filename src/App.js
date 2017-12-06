@@ -59,14 +59,14 @@ class App extends Component {
         {
           "name": "Sasha",
           "sex": "Female",
-          "breed": "Dog",
+          "breed": "Black Lab Mix",
           "images":
           ["img/snoozle1.png",
             "img/snoozle2.png",
             "img/snoozle3.png"
           ],
-          "bio": "My friends call me Sasha but you can call me Snoozle ;-)",
-          "age": 8
+          "bio": "Bring me food, rub my belly, and I'm yours. Also call me a good girl :)",
+          "age": 11
         }
       ],
       currentPet: 0,

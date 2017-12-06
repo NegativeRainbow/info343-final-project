@@ -93,6 +93,8 @@ export default class Card extends Component {
         // If empty (no object), display "No More Users in Area" message
         // Create carousal pictures
         let dogObj = this.props.dog;
+
+        
         let carouselItems = dogObj.images.map(function (img) {
             let obj = { src: '../' + img, altText: dogObj.name, caption: '' };
             return obj;
