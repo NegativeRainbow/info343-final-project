@@ -49,7 +49,17 @@ class App extends Component {
             "img/cody2.jpg",
             "img/cody4.jpg"],
           "bio": "I am dumb and cute"
-        }],
+        },
+      {
+        "name": "Sasha",
+        "sex": "Female",
+        "breed": "Dog",
+        "images":
+          ["img/snoozle1.jpg",
+           "img/snoozle2.jpg",
+           "img/snoozle3.jpg"],
+        "bio": "My friends call me Sasha but you can call me Snoozle ;-)"
+      }],
         currentPet: 0,
     };
   }

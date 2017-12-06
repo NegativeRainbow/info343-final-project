@@ -71,13 +71,17 @@
   font-family: "puppy";
 }
 
+.card {
+  border-top-width: 0;
+  border-bottom-width: 2px;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+}
+
 .profileCard {
   max-width: 500px;
   object-fit: contain;
   font-family: "Scrap-Cat-n-Dog";
-  /* animation: likeAnimation;
-  animation-duration: 1s;
-  animation-iteration-count: infinite; */
 }
 
 .profileLikeAnimate {
