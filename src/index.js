@@ -6,6 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth'; 
+import {BrowserRouter} from 'react-router-dom';
+
 
 
 var config = {
@@ -17,5 +19,5 @@ var config = {
     messagingSenderId: "259039318573"
   };
 firebase.initializeApp(config);
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

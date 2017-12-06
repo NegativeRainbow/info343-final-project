@@ -7,6 +7,9 @@ import {Chatroom} from './chatroom.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth'; 
+import { Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
+import SignUpForm from './SignUp';
+import SignInForm from './SignIn';
 
 
 class App extends Component {
@@ -65,6 +68,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.unregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        this.setState({ user: firebaseUser, loading: false });
+      }
+      else {
+        this.setState({ user: null, loading: false });
+      }
+    });
     this.allConvoRef = firebase.database().ref('allConversations');
     this.allConvoRef.on('value', (snapshot) => {
       if (snapshot.val()) {
@@ -74,11 +85,36 @@ class App extends Component {
         });
       }
     })
-    // this.createConversation();
   }
   
   componentWillUnmount() {
     this.allConvoRef.off();
+    this.unregisterFunction();
+  }
+
+  handleSignUp(email, password, handle, avatar) {
+    this.setState({ errorMessage: null });
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user1) => {
+        return user1.updateProfile({
+          displayName: handle,
+          // photoURL: "https://www.gravatar.com/avatar/" + hash
+        })
+      })
+      .catch((err) => this.setState({ errorMessage: err.message }));
+
+  }
+
+  handleSignIn(email, password) {
+    this.setState({ errorMessage: null });
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch((err) => this.setState({ errorMessage: err.message }))
+
+  }
+  handleSignOut() {
+    this.setState({ errorMessage: null });
+    firebase.auth().signOut()
+      .catch((err) => this.setState({ errorMessage: err.message }))
   }
 
   createConversation() {
@@ -130,6 +166,20 @@ class App extends Component {
                   {!this.state.loading &&       
               <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
             }
+          </div>
+          <div className="container">
+            <Switch>
+              <Route path='/join' component={() =>
+                <SignUpForm signUpCallback={(e, p, h, a) => this.handleSignUp(e, p, h, a)} />
+              } />
+              <Route path='/login' component={() =>
+                <SignInForm signInCallback={(e, p) => this.handleSignIn(e, p)} />
+              } />
+              <Route exact path='/' component={() =>
+                <SignInForm signInCallback={(e, p) => this.handleSignIn(e, p)} />
+              } />
+              <Redirect exact to='/' />
+            </Switch>
           </div>
           
         </main>
