@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
 import firebase from 'firebase/app';
 import './chatroom.css'
 
@@ -34,7 +33,6 @@ export class Chatroom extends Component {
     }
 
     render() {
-
         let allMessages = [];
         if (!this.state.loading) {
             if (this.state.messages) {

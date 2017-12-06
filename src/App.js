@@ -3,6 +3,11 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Card from './Card';
+import {Chatroom} from './chatroom.js';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth'; 
+
 
 class App extends Component {
 
@@ -10,6 +15,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
+      conversationIDs:[],
+      conversationCount: 0,
       pets:
         [
           {
@@ -45,6 +53,30 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.allConvoRef = firebase.database().ref('allConversations');
+    this.allConvoRef.on('value', (snapshot) => {
+      if (snapshot.val()) {
+        this.setState({
+          conversationIDs: Object.keys(snapshot.val()),
+          loading: false
+        });
+      }
+    })
+    // this.createConversation();
+  }
+  
+  componentWillUnmount() {
+    this.allConvoRef.off();
+  }
+
+  createConversation() {
+    this.allConvoRef.push(this.state.conversationCount);
+    this.createdConvo = firebase.database().ref('allConversations/' + this.state.conversationCount);
+    this.createdConvo.push('[Conversation Start Placeholder]');
+    this.setState((prevState) => {conversationCount: prevState.conversationCount++});
+  }
+
 
   onLike(event) {
     this.setState({liked: true});
@@ -62,6 +94,8 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.conversationCount);
+    console.log(firebase.database().ref('allConversations/0'));
     return (
       <div>
         <header>
@@ -74,8 +108,13 @@ class App extends Component {
                   onSwitchCallback={(event) => this.onSwitch(event)}
                   liked={this.state.liked}
                   disliked={this.state.disliked}/>
+                  {!this.state.loading &&       
+              <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
+            }
           </div>
+          
         </main>
+        
       </div>
     );
   }
