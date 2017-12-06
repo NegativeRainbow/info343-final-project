@@ -78,16 +78,15 @@ class App extends Component {
     this.setState((prevState) => {conversationCount: prevState.conversationCount++});
   }
 
-
   onLike(event) {
     setTimeout(() => {
-      this.setState({liked: true, currentPet: this.state.currentPet + 1});}, 1000);
+      this.setState({liked: true, currentPet: this.state.currentPet + 1});}, 700);
     console.log('liked');
 }
 
   onNope(event) {
     setTimeout(() => {
-      this.setState({disliked: true, currentPet: this.state.currentPet + 1});}, 1000);
+      this.setState({disliked: true, currentPet: this.state.currentPet + 1});}, 700);
     console.log('nope');
 }
 
