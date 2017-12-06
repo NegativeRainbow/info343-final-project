@@ -152,7 +152,10 @@ class App extends Component {
   }
 
   cardReset(event) {
-    this.setState({ liked: false, disliked: false, newCard: true });
+    setTimeout(() => {
+      this.setState({ liked: false, disliked: false});
+    }, 700);
+    
     console.log('reset');
   }
 

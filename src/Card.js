@@ -123,13 +123,17 @@ export default class Card extends Component {
                         <p className='card-text bio'>{dogObj.bio}</p>
                         <div className='row'>
                             <div className='col justify-content-center'> 
-                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => {this.props.onNopeCallback(event); this.updateClassOnNope(event)}}></button>
+                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
+                                    {this.props.onNopeCallback(event); this.updateClassOnNope(event); this.props.cardResetCallback(event);}}>
+                                </button>
                             </div>
                             <div className='col justify-content-center'>
                                 <button className={css(styles.btnLike, styles.btnOwner)}></button>
                             </div>
                             <div className='col justify-content-center'>
-                                <button className={css(styles.btnLike)} onClick={(event) => {this.props.onLikeCallback(event); this.updateClassOnLike(event);}}></button>
+                                <button className={css(styles.btnLike)} onClick={(event) => 
+                                    {this.props.onLikeCallback(event); this.updateClassOnLike(event); this.props.cardResetCallback(event);}}>
+                                </button>
                             </div>
                         </div>
                     </div>
