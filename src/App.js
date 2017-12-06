@@ -50,7 +50,7 @@ class App extends Component {
             "img/cody4.jpg"],
           "bio": "I am dumb and cute"
         }],
-        currentPet: 0
+        currentPet: 0,
     };
   }
 
@@ -80,18 +80,25 @@ class App extends Component {
 
 
   onLike(event) {
-    this.setState({liked: true, currentPet: this.state.currentPet + 1});
+    setTimeout(() => {
+      this.setState({liked: true, currentPet: this.state.currentPet + 1});}, 1000);
     console.log('liked');
 }
 
   onNope(event) {
-    this.setState({disliked: true, currentPet: this.state.currentPet + 1});
+    setTimeout(() => {
+      this.setState({disliked: true, currentPet: this.state.currentPet + 1});}, 1000);
     console.log('nope');
 }
 
   onSwitch(event) {
-    this.setState({ownder: true});
+    this.setState(this.state.owner ? {owner: false} : {owner: true});
     console.log('swapped');
+  }
+
+  cardReset(event) {
+    this.setState({liked: false, disliked: false, newCard: true});
+    console.log('reset');
   }
 
   render() {
@@ -103,12 +110,14 @@ class App extends Component {
         </header>
         <main>
           <div className="container">
-            <Card dog={this.state.pets[this.state.currentPet]} 
+            <Card dog={this.state.pets[this.state.currentPet] /*SHOULD GET PASSED A USER COMPONENT W/ OWNER INFO & PET INFO*/} 
                   onLikeCallback={(event) => this.onLike(event)} 
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
+                  cardResetCallback={(event) => this.cardReset(event)}
                   liked={this.state.liked}
-                  disliked={this.state.disliked}/>
+                  disliked={this.state.disliked}
+                  newCard={this.state.newCard}/>
                   {!this.state.loading &&       
               <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
             }

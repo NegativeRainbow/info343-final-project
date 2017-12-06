@@ -4,15 +4,15 @@ import { UncontrolledCarousel, CarouselItem } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite';
 
 
-const likeAnimation = {
-    'from': { transform: 'rotate(10deg)', opacity: 1, left: '0px', top: '0px' },
-    'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '300px' }
-};
+// const likeAnimation = {
+//     'from': { transform: 'rotate(10deg)', opacity: 1, left: '0px', top: '0px' },
+//     'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '300px' }
+// };
 
-const nopeAnimation = {
-    'from': { transform: 'rotate(-10deg)', opacity: 1, right: '0px', top: '0px' },
-    'to': { transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '300px' },
-};
+// const nopeAnimation = {
+//     'from': { transform: 'rotate(-10deg)', opacity: 1, right: '0px', top: '0px' },
+//     'to': { transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '300px' },
+// };
 
 // Button URLS from https://codepen.io/arjentienkamp/
 const styles = StyleSheet.create({
@@ -49,14 +49,14 @@ const styles = StyleSheet.create({
         backgroundSize: '30px',
         backgroundPosition: 'center',
     },
-    cardNope: {
-        animationName: nopeAnimation,
-        animationDuration: '1s',
-    },
-    cardLike: {
-        animationName: likeAnimation,
-        animationDuration: '1s',
-    }
+    // cardNope: {
+    //    animationName: nopeAnimation,
+    //     animationDuration: '1s',
+    // },
+    // cardLike: {
+    //     animationName: likeAnimation,
+    //     animationDuration: '1s',
+    // }
 }
 )
 
@@ -64,6 +64,27 @@ export default class Card extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true,
+        }
+    }
+
+    componentDidMount() {
+        this.setState({loading: false}); // PLACEHOLDER FOR NOW
+    }
+
+    updateClassOnLike(event) {
+        let card = document.querySelector(".profileCard");
+        card.className += ' profileLikeAnimate';
+        setTimeout(() => {
+            card.className = 'card profileCard'; }, 1000);
+    }
+
+    updateClassOnNope(event) {
+        let card = document.querySelector(".profileCard");
+        card.className += ' profileNopeAnimate';
+        setTimeout(() => {
+            card.className = 'card profileCard'; }, 1000);
     }
 
     render() {
@@ -77,13 +98,18 @@ export default class Card extends Component {
             return obj;
         })
 
-        let cardAnimation = css(
-            this.props.liked && styles.cardLike,
-            this.props.disliked && styles.cardNope
-        );
+        // if (this.props.liked) {
+        //     this.updateClassOnLike();
+        // }
+
+        // let cardAnimation = css(
+        //     this.props.liked && styles.cardLike,
+        //     this.props.disliked && styles.cardNope
+        // );
         return (
             <div className="d-flex justify-content-center">
-                <div className={"card profileCard " + cardAnimation}>
+                { this.state.loading ?  <div>Loading...</div> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
+                <div className={"card profileCard "/* + cardAnimation*/}>
                     <UncontrolledCarousel
                         items={carouselItems}
                         indicators={true}
@@ -96,18 +122,18 @@ export default class Card extends Component {
                         <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
                         <p className='card-text bio'>{dogObj.bio}</p>
                         <div className='row'>
-                            <div className='col justify-content-center'>
-                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => this.props.onNopeCallback(event)}></button>
+                            <div className='col justify-content-center'> 
+                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => {this.props.onNopeCallback(event); this.updateClassOnNope(event)}}></button>
                             </div>
                             <div className='col justify-content-center'>
                                 <button className={css(styles.btnLike, styles.btnOwner)}></button>
                             </div>
                             <div className='col justify-content-center'>
-                                <button className={css(styles.btnLike)} onClick={(event) => this.props.onLikeCallback(event)}></button>
+                                <button className={css(styles.btnLike)} onClick={(event) => {this.props.onLikeCallback(event); this.updateClassOnLike(event);}}></button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> }
             </div>
         );
     }
