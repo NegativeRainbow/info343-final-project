@@ -105,11 +105,6 @@
   max-height: 100%; 
   max-width: 100%; 
   object-fit: contain;
-
-  /* object-fit: contain;
-  width: 100%;
-  max-height: 100%;
-  margin-bottom: 1rem; */
 }
 
 @keyframes nopeAnimation {
@@ -122,10 +117,6 @@
   from { transform: rotate(10deg); opacity: 1; left: 0px; top: 0px }
   to { transform: rotate(65deg); opacity: 0; left: 200px; top: 300px }
 }
-
-/* .card-flipper {
-  perspective: 1000px;
-} */
 
 .card-flipper,
 .petSide,
@@ -162,4 +153,46 @@ position: relative;
 .ownerSide {
   z-index: 2;
   transform: rotateY(180deg);
+}
+/* FROM https://codepen.io/lapty/pen/YqPpMO?limit=all&page=4&q=tinder*/
+
+@keyframes pulse-search {
+  0% { width: 100px; height: 100px; opacity: .65}
+  100% { width: 350px; height: 350px; opacity: .05 }
+}
+
+.profPic, .search-anim, .search-anim2 {
+  margin: auto;
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background-image: url('https://i.pinimg.com/736x/5e/ae/d0/5eaed0f1541f54012ae46f554b5c45e6--dog-paw-prints-car-stickers.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.profPic {
+  border: 2px white solid;
+}
+
+.search-anim, .search-anim2 {
+  border: 2px #D2527F solid;
+  background-image: none;
+  background-color: #E08283;
+  animation: pulse-search 2.8s ease-in infinite;
+}
+
+.search-anim2 {
+  animation-delay: 1.4s;
+}
+
+.test-container {
+  padding-top: 400px;
 }
