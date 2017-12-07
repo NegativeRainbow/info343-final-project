@@ -3,17 +3,6 @@ import './App.css';
 import { UncontrolledCarousel, CarouselItem } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite';
 
-
-// const likeAnimation = {
-//     'from': { transform: 'rotate(10deg)', opacity: 1, left: '0px', top: '0px' },
-//     'to': { transform: 'rotate(65deg)', opacity: 0, left: '200px', top: '300px' }
-// };
-
-// const nopeAnimation = {
-//     'from': { transform: 'rotate(-10deg)', opacity: 1, right: '0px', top: '0px' },
-//     'to': { transform: 'rotate(-65deg)', opacity: 0, right: '200px', top: '300px' },
-// };
-
 // Button URLS from https://codepen.io/arjentienkamp/
 const styles = StyleSheet.create({
     btnLike: {
@@ -49,14 +38,10 @@ const styles = StyleSheet.create({
         backgroundSize: '30px',
         backgroundPosition: 'center',
     },
-    // cardNope: {
-    //    animationName: nopeAnimation,
-    //     animationDuration: '1s',
-    // },
-    // cardLike: {
-    //     animationName: likeAnimation,
-    //     animationDuration: '1s',
-    // }
+    carouselWrap: {
+        backgroundColor: '#505050',
+        borderRadius: '5px',
+    }
 }
 )
 
@@ -152,13 +137,15 @@ export default class Card extends Component {
                         <div className="flip">
                             <div className='petSide'>
                                 <div className={"card profileCardPet "/* + cardAnimation*/}>
-                                    <UncontrolledCarousel
-                                        items={petCarouselItems}
-                                        indicators={true}
-                                        controls={true}
-                                        autoPlay={false}>
-                                        <CarouselItem cssModule={{ width: '100%' }} />
-                                    </UncontrolledCarousel>
+                                    <div className={css(styles.carouselWrap)}>
+                                        <UncontrolledCarousel
+                                            items={petCarouselItems}
+                                            indicators={true}
+                                            controls={true}
+                                            autoPlay={false}>
+                                            <CarouselItem cssModule={{ width: '100%' }} />
+                                        </UncontrolledCarousel>
+                                    </div>
                                     <div className="card-body">
                                         <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
                                         <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
@@ -169,7 +156,7 @@ export default class Card extends Component {
                                                 </button>
                                             </div>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => {/* this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, true)}}></button>
+                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => {/* this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, true) }}></button>
                                             </div>
                                             <div className='col justify-content-center'>
                                                 <button className={css(styles.btnLike)} onClick={(event) => { this.props.onLikeCallback(event); this.updateClassOnLikePet(event); this.props.cardResetCallback(event); }}>
@@ -181,13 +168,15 @@ export default class Card extends Component {
                             </div>
                             <div className='ownerSide'>
                                 <div className={"card profileCardOwner "/* + cardAnimation*/}>
-                                    <UncontrolledCarousel
-                                        items={ownerCarouselItems}
-                                        indicators={true}
-                                        controls={true}
-                                        autoPlay={false}>
-                                        <CarouselItem cssModule={{ width: '100%' }} />
-                                    </UncontrolledCarousel>
+                                    <div className={css(styles.carouselWrap)}>
+                                        <UncontrolledCarousel
+                                            items={ownerCarouselItems}
+                                            indicators={true}
+                                            controls={true}
+                                            autoPlay={false}>
+                                            <CarouselItem cssModule={{ width: '100%' }} />
+                                        </UncontrolledCarousel>
+                                    </div>
                                     <div className="card-body">
                                         <h3 className="card-title name">{ownerObj.name + ', ' + ownerObj.age}</h3>
                                         <p className="card-text breed">{ownerObj.sex + ', ' + ownerObj.occupation}</p>
@@ -198,7 +187,7 @@ export default class Card extends Component {
                                                 </button>
                                             </div>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => { /*this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, false)}}></button>
+                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => { /*this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, false) }}></button>
                                             </div>
                                             <div className='col justify-content-center'>
                                                 <button className={css(styles.btnLike)} onClick={(event) => { this.props.onLikeCallback(event); this.updateClassOnLikeOwner(event); this.props.cardResetCallback(event); }}>

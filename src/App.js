@@ -65,7 +65,7 @@ class App extends Component {
             "img/snoozle2.png",
             "img/snoozle3.png"
           ],
-          "bio": "Bring me food, rub my belly, and I'm yours. Also call me a good girl :)",
+          "bio": "Bring me food, rub my belly, and I'm yours.",
           "age": 11
         }
       ],

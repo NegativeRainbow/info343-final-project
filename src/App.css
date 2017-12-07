@@ -135,7 +135,6 @@
 }
 
 .flipper {
-    /* TEST */
   transform: rotateY(180deg);
   transition: 0.6s;
   transform-style: preserve-3d;
@@ -143,7 +142,6 @@
 }
 
 .flipBack {
-  /* TEST */
 transform: rotateY(0deg);
 transition: 0.6s;
 transform-style: preserve-3d;
@@ -154,9 +152,6 @@ position: relative;
 .ownerSide {
   backface-visibility: hidden;
   position: absolute;
-  /* position: absolute;
-  top: 0;
-  left: 0; */
 }
 
 .petSide {
@@ -167,5 +162,4 @@ position: relative;
 .ownerSide {
   z-index: 2;
   transform: rotateY(180deg);
-
 }
