@@ -52,7 +52,7 @@ export default class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            morePets: this.props.morePets,
+            morePets: this.props.noMorePets,
         }
     }
 

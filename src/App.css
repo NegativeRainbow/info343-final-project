@@ -154,7 +154,7 @@ position: relative;
   z-index: 2;
   transform: rotateY(180deg);
 }
-/* FROM https://codepen.io/lapty/pen/YqPpMO?limit=all&page=4&q=tinder*/
+/* BELOW FROM https://codepen.io/lapty/pen/YqPpMO?limit=all&page=4&q=tinder*/
 
 @keyframes pulse-search {
   0% { width: 100px; height: 100px; opacity: .65}
