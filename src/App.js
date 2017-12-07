@@ -19,8 +19,6 @@ class App extends Component {
     super(props);
     this.state = {
       loading: true,
-      conversationIDs: [],
-      conversationCount: 0,
       pets:
       [
         {
@@ -96,19 +94,10 @@ class App extends Component {
         this.setState({ user: null });
       }
     });
-    this.allConvoRef = firebase.database().ref('allConversations');
-    this.allConvoRef.on('value', (snapshot) => {
-      if (snapshot.val()) {
-        this.setState({
-          conversationIDs: Object.keys(snapshot.val()),
-          loading: false
-        });
-      }
-    })
+    
   }
 
   componentWillUnmount() {
-    this.allConvoRef.off();
     this.unregisterFunction();
   }
   // petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio
@@ -152,7 +141,8 @@ class App extends Component {
       pet: petData,
       owner: ownerData,
       noSwipes: ['placeholder'],
-      yesSwipes: ['placeholder']
+      yesSwipes: ['placeholder'],
+      chats: [0]
     })
   }
 
@@ -168,11 +158,45 @@ class App extends Component {
       .catch((err) => this.setState({ errorMessage: err.message }))
   }
 
+
+  // var ref = firebase.database().ref("users/ada");
+  // ref.once("value")
+  //   .then(function(snapshot) {
+  //     var key = snapshot.key; // "ada"
+  //     var childKey = snapshot.child("name/last").key; // "last"
+  //   });
+  // createConversation(user1, user2) {
+    
   createConversation() {
-    this.allConvoRef.push(this.state.conversationCount);
-    this.createdConvo = firebase.database().ref('allConversations/' + this.state.conversationCount);
-    this.createdConvo.push('[Conversation Start Placeholder]');
-    this.setState((prevState) => { conversationCount: prevState.conversationCount++ });
+    var countRef = firebase.database().ref('conversationCount');
+    countRef.once("value")
+    .then(function(snapshot) {
+      var val = snapshot.val();
+      val = val + 1;
+      return val;
+    })
+    .then((val) => {
+      countRef.set(val);
+      var userOneRef = firebase.database().ref('users/' + 'bOvylagcPnSmQy7PYGnPF5lEKcx2'+ '/chats');
+      var userTwoRef = firebase.database().ref('users/' + 'VAqylQwgL6MQODihTTR75u3zesd2' + '/chats');
+      userOneRef.once("value")
+      .then((snapshot) => {
+        console.log(snapshot.val());
+        var chatArray = snapshot.val();
+        chatArray.push(val);        
+        userOneRef.set(chatArray);
+      })
+      userTwoRef.once("value")
+      .then((snapshot) => {
+        var chatArray = snapshot.val();
+        chatArray.push(val);
+        userTwoRef.set(chatArray);
+      })
+      var createdConvo = firebase.database().ref('allConversations/' + val);
+      createdConvo.push('[Conversation Start Placeholder]');
+
+    });
+
   }
 
 
@@ -216,7 +240,6 @@ class App extends Component {
   }
 
 
-  // petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio
   render() {
     let content = null;
     if (!this.state.user) {
@@ -239,6 +262,7 @@ class App extends Component {
       )
 
     } else {
+      {this.createConversation()};
       content = (
         <div className='row'>
           <div className="border col-2">
