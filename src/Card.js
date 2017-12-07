@@ -106,54 +106,16 @@ export default class Card extends Component {
     }
 
     updateClassOnSwitch(event, isPet) {
-        // if (this.props.displayOwner) {
-        //     document.querySelector(".card-flipper").classList.toggle("flip");
-        //     console.log('flipped');
-        // }
-        // else {
-        //     document.querySelector(".card-flipper").classList.toggle("flipBack");
-        //     console.log('flipped');
-        // }
-
         if (isPet) {
-            document.querySelector(".card-flipper").classList.toggle("flipper");
-            // setTimeout(() => {
-            //     document.querySelector(".card-flipper").classList.toggle("flipper");
-            // }, 600);
+            let card = document.querySelector(".card-flipper");
+            card.className = 'card-flipper flipper';
             console.log('flipped');
         }
         else {
-            document.querySelector(".card-flipper").classList.toggle("flipBack");
-            // setTimeout(() => {
-            //     document.querySelector(".card-flipper").classList.toggle("flipBack");
-            // }, 600);
-            console.log('flipped');
+            let card = document.querySelector(".card-flipper");
+            card.className = 'card-flipper flipBack';
+            console.log('flipped back');
         }
-
-           // document.querySelector(".card-flipper").classList.toggle("flipper"); // KINDA GOOD 
-
-
-        // if (isPet) {
-        //     let card = document.querySelector(".card-flipper");
-        //     card.className = 'card-flipper flip';
-        //     setTimeout(() => {
-        //         card.className = 'card-flipper';
-        //     }, 600);
-        //     console.log('flipped');
-        // }
-        // else {
-        //     let card = document.querySelector(".card-flipper");
-        //     card.className = 'card-flipper flipBack';
-        //     setTimeout(() => {
-        //         card.className = 'card-flipper';
-        //     }, 600);
-        //     console.log('flipped back');
-        // }
-
-        // document.querySelector(".card-flipper").classList.toggle("flip");
-        // console.log('flipped');
-        
-
     }
 
     render() {
