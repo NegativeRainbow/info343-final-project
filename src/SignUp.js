@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; //import React Component
-import { Button, FormFeedback } from 'reactstrap';
+import { Button, FormFeedback, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
 import { FormGroup } from 'reactstrap';
 import { Label } from 'reactstrap';
 import { Input } from 'reactstrap';
@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom';
 import './SignUp.css'; //load module CSS
 import noUserPic from './img/no-user-pic.png'; //placeholder image (as a data Uri)
 
+
 class SignUpForm extends Component {
     constructor(props) {
         super(props);
+        this.genderOnChange = this.genderOnChange.bind(this);
         this.state = {
             email: undefined,
             password: undefined,
@@ -22,75 +24,93 @@ class SignUpForm extends Component {
             ownerName: undefined,
             ownerImg: undefined,
             ownerAge: undefined,
-            userBio: undefined
-        }; //initialize state
+            userBio: undefined,
+        }; 
     }
-
-    // pN, pI, pG, pA, pB, oN, oI, oA, uB
+  
     handleChange(event) {
         let newState = {};
         newState[event.target.name] = event.target.value;
         this.setState(newState);
     }
-
-    //handle signUp button
-    handleSignUp(event) {
-        event.preventDefault(); //don't submit
-        let avatar = this.state.avatar || noUserPic; //assign default if undefined
-        this.props.signUpCallback(
-            this.state.email, this.state.password, 
-            this.state.petName, this.petImg, this.petGender, this.petAge, this.petBreed, 
-            this.ownerName, this.ownerImg, this.ownerAge, 
-            this.userBio);
+    genderOnChange(event) {
+        this.setState({petGender: event.target.value});
     }
 
-    /**
-     * A helper function to validate a value based on an object of validations
-     * Second parameter has format e.g., 
-     *    {required: true, minLength: 5, email: true}
-     * (for required field, with min length of 5, and valid email)
-     */
+    handleSignUp(event) {
+        event.preventDefault(); 
+        this.props.signUpCallback(
+            this.state.email, this.state.password,
+            this.state.petName, this.state.petImg, this.state.petGender, this.state.petAge, this.state.petBreed,
+            this.state.ownerName, this.state.ownerImg, this.state.ownerAge,
+            this.state.userBio);
+    }
+
     validate(value, validations) {
         let errors = [];
 
-        if (value !== undefined) { //check validations
-            //handle required
+        if (value !== undefined) { 
             if (validations.required && value === '') {
                 errors.push('Required field.');
             }
 
-            //handle minLength
             if (validations.minLength && value.length < validations.minLength) {
                 errors.push(`Must be at least ${validations.minLength} characters.`);
             }
 
-            //handle email type
+            if (validations.integer) {
+                var intValue = parseInt(value);
+                if (!Number.isInteger(intValue)) {
+                    errors.push('This is not a valid number, please input an integer.');
+                } else if (intValue < 1) {
+                    errors.push('Negative values cannot be accepted. Please input a postive value');
+                }
+            }
             if (validations.email) {
-                //pattern comparison from w3c
-                //https://www.w3.org/TR/html-markup/input.email.html#input.email.attrs.value.single
+             
                 let valid = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value)
                 if (!valid) {
                     errors.push('Not an email address.')
                 }
             }
-            return errors; //report the errors
+
+            if (validations.lettersOnly) {
+                let valid = /^[a-zA-Z ]*$/.test(value);
+                if (!valid) {
+                    errors.push(`Nice try guy. This field can't contain whacky characters or numbers.`);
+                }
+            }
+            return errors; 
         }
-        return undefined; //no errors defined (because no value defined!)
+        return undefined; 
     }
 
-
-    /* SignUpForm#render() */
     render() {
 
         let emailErrors = this.validate(this.state.email, { email: true, required: true });
         let passwordErrors = this.validate(this.state.password, { email: false, minLength: 6, required: true });
-        let handleErrors = this.validate(this.state.handle, { required: true, email: false });
+        let petNameErrors = this.validate(this.state.petName, { required: true, lettersOnly: true });
+        let petImgErrors = this.validate(this.state.petImg, { required: true });
+        let petGenderErrors = this.validate(this.state.petGender, { required: true });
+        let petAgeErrors = this.validate(this.state.petAge, { required: true, integer: true });
+        let petBreedErrors = this.validate(this.state.petBreed, { required: true, lettersOnly: true });
+        let ownerNameErrors = this.validate(this.state.ownerName, { required: true, lettersOnly: true });
+        let ownerImgErrors = this.validate(this.state.ownerImg, { required: true});
+        let ownerAgeErrors = this.validate(this.state.ownerAge, { required: true, integer: true});
 
         let emailValid = undefined;
         let passwordValid = undefined;
-        let handleValid = undefined;
-
+        let petNameValid = undefined;
+        let petImgValid = undefined;
+        let petGenderValid = undefined;
+        let petAgeValid = undefined;
+        let petBreedValid = undefined;
+        let ownerNameValid = undefined;
+        let ownerImgValid = undefined;
+        let ownerAgeValid = undefined;
+        let userBioValid = undefined;
         let signUpButton = true;
+
 
         if (emailErrors !== undefined && emailErrors.length === 0) {
             emailValid = true;
@@ -104,15 +124,45 @@ class SignUpForm extends Component {
         else if (passwordErrors !== undefined && passwordErrors.length !== 0) {
             passwordValid = false;
         }
-        if (handleErrors !== undefined && handleErrors.length === 0) {
-            handleValid = true;
+        if (petNameErrors !== undefined && petNameErrors.length === 0) {
+            petNameValid = true;
+        } else if (petNameErrors !== undefined && petNameErrors.length !== 0) {
+            petNameValid = false;
         }
-        else if (handleErrors !== undefined && handleErrors.length !== 0) {
-            handleValid = false;
+        if (petImgErrors !== undefined && petImgErrors.length === 0) {
+            petImgValid = true;
+        } else if (petImgErrors !== undefined && petImgErrors.length !== 0) {
+            petImgValid = false;
         }
-
-        if (emailValid && passwordValid && handleValid) {
-            signUpButton = false;
+        if (petGenderErrors !== undefined && petGenderErrors.length === 0) {
+            petGenderValid = true;
+        } else if (petGenderErrors !== undefined && petGenderErrors.length !== 0) {
+            petGenderValid = false;
+        }
+        if (petAgeErrors !== undefined && petAgeErrors.length === 0) {
+            petAgeValid = true;
+        } else if (petAgeErrors !== undefined && petAgeErrors.length !== 0) {
+            petAgeValid = false;
+        }
+        if (petBreedErrors !== undefined && petBreedErrors.length === 0) {
+            petBreedValid = true;
+        } else if (petBreedErrors !== undefined && petBreedErrors.length !== 0) {
+            petBreedValid = false;
+        }
+        if (ownerNameErrors !== undefined && ownerNameErrors.length === 0) {
+            ownerNameValid = true;
+        } else if (ownerNameErrors !== undefined && ownerNameErrors.length !== 0) {
+            ownerNameValid = false;
+        }
+        if (ownerImgErrors !== undefined && ownerImgErrors.length === 0) {
+            ownerImgValid = true;
+        } else if (ownerImgErrors !== undefined && ownerImgErrors.length !== 0) {
+            ownerImgValid = false;
+        }
+        if (ownerAgeErrors !== undefined && ownerAgeErrors.length === 0) {
+            ownerAgeValid = true;
+        } else if (ownerAgeErrors !== undefined && ownerAgeErrors.length !== 0) {
+            ownerAgeValid = false;
         }
 
         let emailForm = false;
@@ -125,14 +175,51 @@ class SignUpForm extends Component {
             passwordForm = true;
         }
 
-        let handleForm = false;
-        if (handleValid === false && handleErrors !== undefined && handleErrors.length > 0) {
-            handleForm = true;
+        let petNameForm = false;
+        if (petNameValid === false && petNameErrors !== undefined && petNameErrors.length > 0) {
+            petNameForm = true;
+        }
+
+        let petImgForm = false;
+        if (petImgValid === false && petImgErrors !== undefined && petImgErrors.length > 0) {
+            petImgForm = true;
+        }
+
+        let petGenderForm = false;
+        if (petGenderValid === false && petGenderErrors !== undefined && petGenderErrors.length > 0) {
+            petGenderForm = true;
+        }
+
+        let petAgeForm = false;
+        if (petAgeValid === false && petAgeErrors !== undefined && petAgeErrors.length > 0) {
+            petAgeForm = true;
+        }
+
+        let petBreedForm = false;
+        if (petBreedValid === false && petBreedErrors !== undefined && petBreedErrors.length > 0) {
+            petBreedForm = true;
+        }
+
+        let ownerNameForm = false;
+        if (ownerNameValid === false && ownerNameErrors !== undefined && ownerNameErrors.length > 0) {
+            ownerNameForm = true;
+        }
+        let ownerImgForm = false;
+        if (ownerImgValid === false && ownerImgErrors !== undefined && ownerImgErrors.length > 0) {
+            emailForm = true;
+        }
+
+        let ownerAgeForm = false;
+        if (ownerAgeValid === false && ownerAgeErrors !== undefined && ownerAgeErrors.length > 0) {
+            ownerAgeForm = true;
+        }
+
+        if (emailValid && passwordValid && petNameValid && petImgValid && petGenderValid && petAgeValid && petBreedValid && ownerNameValid && ownerAgeValid && ownerImgValid) {
+            signUpButton = false;
         }
 
         return (
             <form>
-                {/* email */}
                 < FormGroup >
                     <Label for="email">Email</Label>
                     <Input valid={emailValid} onChange={(event) => this.handleChange(event)} id="email"
@@ -144,7 +231,6 @@ class SignUpForm extends Component {
                     })}
                 </FormGroup>
 
-                {/* password */}
                 <FormGroup>
                     <Label for="password">Password</Label>
                     <Input valid={passwordValid} onChange={(event) => this.handleChange(event)} id="password"
@@ -156,18 +242,99 @@ class SignUpForm extends Component {
                     })}
                 </FormGroup>
 
-                {/* handle */}
                 < FormGroup >
-                    <Label htmlFor="handle">Handle</Label>
-                    <Input valid={handleValid} onChange={(event) => this.handleChange(event)} id="handle"
-                        name="handle"
+                    <Label for="petName">Pet Name</Label>
+                    <Input valid={petNameValid} onChange={(event) => this.handleChange(event)} id="petName"
+                        type="petName"
+                        name="petName"
                     />
-                    {handleForm === true && handleErrors.map((error) => {
+                    {petNameForm === true && petNameErrors.map((error) => {
                         return <FormFeedback key={error}>{error}</FormFeedback>
                     })}
                 </FormGroup>
 
-                {/* buttons */}
+                < FormGroup >
+                    <Label for="petImg">Pet Image URL</Label>
+                    <Input valid={petImgValid} onChange={(event) => this.handleChange(event)} id="petImg"
+                        type="petImg"
+                        name="petImg"
+                    />
+                    {petImgForm === true && petImgErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+                <FormGroup>
+                    <Label for="petGender">Select your Dog's Gender</Label>
+                    <Input type="select" name="select" id="genderSelect" onChange={this.genderOnChange} >
+                        <option value="N/A">N/A</option>
+                        <option value="Male">B O Y E Doggo</option>
+                        <option value="Female">Good Girl Pupper</option>
+                    </Input>
+                </FormGroup>
+
+                < FormGroup >
+                    <Label for="petAge">Pet Age</Label>
+                    <Input valid={petAgeValid} onChange={(event) => this.handleChange(event)} id="petAge"
+                        type="petAge"
+                        name="petAge"
+                    />
+                    {petAgeForm === true && petAgeErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+
+                < FormGroup >
+                    <Label for="petBreed">Pet Breed</Label>
+                    <Input valid={petBreedValid} onChange={(event) => this.handleChange(event)} id="petBreed"
+                        type="petBreed"
+                        name="petBreed"
+                    />
+                    {petBreedForm === true && petBreedErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+
+                < FormGroup >
+                    <Label for="ownerName">Owner Name</Label>
+                    <Input valid={ownerNameValid} onChange={(event) => this.handleChange(event)} id="ownerName"
+                        type="ownerName"
+                        name="ownerName"
+                    />
+                    {ownerNameForm === true && ownerNameErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+
+                < FormGroup >
+                    <Label for="ownerImg">Owner Image URL</Label>
+                    <Input valid={petImgValid} onChange={(event) => this.handleChange(event)} id="ownerImg"
+                        type="ownerImg"
+                        name="ownerImg"
+                    />
+                    {ownerImgForm === true && ownerImgErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+
+                < FormGroup >
+                    <Label for="ownerAge">Owner Age</Label>
+                    <Input valid={petImgValid} onChange={(event) => this.handleChange(event)} id="ownerAge"
+                        type="ownerAge"
+                        name="ownerAge"
+                    />
+                    {ownerAgeForm === true && ownerAgeErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+
+                < FormGroup >
+                    <Label for="userBio">Write a Bio!</Label>
+                    <Input onChange={(event) => this.handleChange(event)} id="userBio"
+                        type="userBio"
+                        name="userBio"
+                    />
+                </FormGroup>
+
                 <FormGroup>
                     <Button disabled={signUpButton} className="mr-2" color="primary" onClick={(e) => this.handleSignUp(e)} >
                         Sign-up
@@ -179,27 +346,25 @@ class SignUpForm extends Component {
     }
 }
 
-//A simple component that displays the form, with alert callbacks
 class SignUpApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
-    handleSignUp(email, password, handle, avatar) {
-        this.setState({ alert: `Signing up: '${email}' with handle '${handle}'` });
+    handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio) {
+        this.setState({ alert: `Signing up: '${email}'. User's name is '${ownerName}' with pet '${petName}'.` });
     }
 
     render() {
         return (
             <div className="container">
-                <header>
-                    <h1>Sign Up!</h1>
-                </header>
                 {this.state.alert !== undefined ?
                     <Alert color="success">{this.state.alert}</Alert> :
                     <SignUpForm
-                        signUpCallback={(e, p, h, a) => this.handleSignUp(e, p, h, a)} />}
+                        signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB)} 
+                    />
+                }
             </div>
         );
     }
