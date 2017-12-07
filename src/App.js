@@ -31,7 +31,8 @@ class App extends Component {
             "img/00654c82-4df9-418f-b5f1-c6d094457f1f.jpg",
             "img/7683254c-debd-4d9c-b0ef-7861d7ad0cd5.jpg"
           ],
-          "bio": "1 gud boi. No Hookups"
+          "bio": "1 gud boi. No Hookups",
+          "age": 3
         },
         {
           "name": "Spot",
@@ -41,7 +42,8 @@ class App extends Component {
             "img/867df82c-1b72-495e-a349-7c067c700132.jpg",
             "img/f4456b54-3c2c-4024-adc2-04fc19c5561b.jpg"
           ],
-          "bio": "I may be a Terrier but I sure ain't Terrierfying"
+          "bio": "I may be a Terrier but I sure ain't Terrierfying",
+          "age": 7
         },
         {
           "name": "Cody",
@@ -51,18 +53,22 @@ class App extends Component {
           ["img/cody3.jpg",
             "img/cody2.jpg",
             "img/cody4.jpg"],
-          "bio": "I am dumb and cute"
+          "bio": "I am dumb and cute",
+          "age": 5
         },
         {
           "name": "Sasha",
           "sex": "Female",
-          "breed": "Dog",
+          "breed": "Black Lab Mix",
           "images":
-          ["img/snoozle1.jpg",
-            "img/snoozle2.jpg",
-            "img/snoozle3.jpg"],
-          "bio": "My friends call me Sasha but you can call me Snoozle ;-)"
-        }],
+          ["img/snoozle1.png",
+            "img/snoozle2.png",
+            "img/snoozle3.png"
+          ],
+          "bio": "Bring me food, rub my belly, and I'm yours. Also call me a good girl :)",
+          "age": 11
+        }
+      ],
       currentPet: 0,
     };
   }
