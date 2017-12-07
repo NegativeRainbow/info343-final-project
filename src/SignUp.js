@@ -14,11 +14,19 @@ class SignUpForm extends Component {
         this.state = {
             email: undefined,
             password: undefined,
-            handle: undefined,
-            avatar: undefined,
+            petName: undefined,
+            petImg: undefined,
+            petGender: undefined,
+            petAge: undefined,
+            petBreed: undefined,
+            ownerName: undefined,
+            ownerImg: undefined,
+            ownerAge: undefined,
+            userBio: undefined
         }; //initialize state
     }
 
+    // pN, pI, pG, pA, pB, oN, oI, oA, uB
     handleChange(event) {
         let newState = {};
         newState[event.target.name] = event.target.value;
@@ -29,7 +37,11 @@ class SignUpForm extends Component {
     handleSignUp(event) {
         event.preventDefault(); //don't submit
         let avatar = this.state.avatar || noUserPic; //assign default if undefined
-        this.props.signUpCallback(this.state.email, this.state.password, this.state.handle, avatar);
+        this.props.signUpCallback(
+            this.state.email, this.state.password, 
+            this.state.petName, this.petImg, this.petGender, this.petAge, this.petBreed, 
+            this.ownerName, this.ownerImg, this.ownerAge, 
+            this.userBio);
     }
 
     /**
@@ -159,9 +171,8 @@ class SignUpForm extends Component {
                 <FormGroup>
                     <Button disabled={signUpButton} className="mr-2" color="primary" onClick={(e) => this.handleSignUp(e)} >
                         Sign-up
-          </Button>
+                    </Button>
                     <Link to='/login'><Button color='warning'>Already Have An Account? Sign-In</Button></Link>
-
                 </FormGroup>
             </form >
         )

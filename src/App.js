@@ -96,12 +96,39 @@ class App extends Component {
     this.setState({ errorMessage: null });
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user1) => {
-        return user1.updateProfile({
-          displayName: handle,
-          // photoURL: "https://www.gravatar.com/avatar/" + hash
-        })
+        this.pushUserNode(user1.uid, this.createUserNode());
+        // return user1.updateProfile({
+        //   displayName: handle,
+        // })
       })
       .catch((err) => this.setState({ errorMessage: err.message }));
+
+  }
+
+  /* Potentially add in preferences */
+  createUserNode(petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio) {
+    return {
+      pet: {
+        name: petName,
+        imgs: petImgs,
+        gender: petGender,
+        age: petAge,
+        breed: petBreed
+      },
+      owner: {
+        name: ownerName,
+        imgs: ownerImgs,
+        age: ownerAge
+      },
+      bio: userBio
+    }
+  }
+
+  pushUserNode(inputUser, userData) {
+    this.userRef = firebase.database().ref('users/' + inputUser);
+    // this.userRef.push(inputUser.displayName);
+    this.userRef.push(userData);
+     
 
   }
 
@@ -124,13 +151,7 @@ class App extends Component {
     this.setState((prevState) => { conversationCount: prevState.conversationCount++ });
   }
 
-  createUserNode() {
-    console.log(this.state.user);
-    this.userRef = firebase.database().ref('users');
-    console.log(this.state.user.displayName);
-    this.userRef.push(this.state.user.uid);
-    
-  }
+
 
   onLike(event) {
     setTimeout(() => {
@@ -153,12 +174,14 @@ class App extends Component {
 
   cardReset(event) {
     setTimeout(() => {
-      this.setState({ liked: false, disliked: false});
+      this.setState({ liked: false, disliked: false });
     }, 700);
-    
+
     console.log('reset');
   }
 
+
+  // petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio
   render() {
     let content = null;
     if (!this.state.user) {
@@ -166,7 +189,7 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route path='/join' component={() =>
-              <SignUpForm signUpCallback={(e, p, h, a) => this.handleSignUp(e, p, h, a)} />
+              <SignUpForm signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB)} />
             } />
             <Route path='/login' component={() =>
               <SignInForm signInCallback={(e, p) => this.handleSignIn(e, p)} />
@@ -181,7 +204,6 @@ class App extends Component {
       )
 
     } else {
-      this.createUserNode();
       content = (
         <div className='row'>
           <div className="border col-2">
@@ -198,7 +220,7 @@ class App extends Component {
                   disliked={this.state.disliked}
                   newCard={this.state.newCard} />
               } />
-              
+
               <Route path='/conversations' component={() =>
                 <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
               } />
@@ -206,9 +228,9 @@ class App extends Component {
             </Switch>
           </div>
           <button aria-label="Log Out Button" className="btn btn-warning"
-              onClick={() => this.handleSignOut()}>
-              Log Out {this.state.user.displayName}
-            </button>
+            onClick={() => this.handleSignOut()}>
+            Log Out {this.state.user.displayName}
+          </button>
         </div>
       )
 
