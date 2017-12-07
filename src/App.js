@@ -69,6 +69,20 @@ class App extends Component {
           "age": 11
         }
       ],
+      owners:
+      [
+        {
+          "name": "Joel",
+          "sex": "Male",
+          "occupation": "Professor",
+          "images":
+          ["img/joel.jpg"
+          ],
+          "bio": "Thumbs Up!",
+          "age": "30-Something"
+        }
+      ],
+      owner: false,
       currentPet: 0,
     };
   }
@@ -174,9 +188,20 @@ class App extends Component {
   }
 
   onSwitch(event) {
-    this.setState(this.state.owner ? { owner: false } : { owner: true });
+    setTimeout(() => {
+      this.setState({ liked: false, disliked: false});
+    
+    if (this.state.owner) {
+      this.setState({owner: false});
+    }
+    else {
+      this.setState({owner: true});
+    }
+  }, 700);
+    // this.setState(this.state.owner ? { owner: false } : { owner: true });
     console.log('swapped');
-  }
+    console.log(this.state.owner);
+    }
 
   cardReset(event) {
     setTimeout(() => {
@@ -218,6 +243,8 @@ class App extends Component {
             <Switch>
               <Route path='/swipe' component={() =>
                 <Card dog={this.state.pets[this.state.currentPet] /*SHOULD GET PASSED A USER COMPONENT W/ OWNER INFO & PET INFO*/}
+                  owner={this.state.owners[0]}
+                  displayOwner={this.state.owner}
                   onLikeCallback={(event) => this.onLike(event)}
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}

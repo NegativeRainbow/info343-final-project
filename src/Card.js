@@ -70,21 +70,90 @@ export default class Card extends Component {
     }
 
     componentDidMount() {
-        this.setState({loading: false}); // PLACEHOLDER FOR NOW
+        this.setState({ loading: false }); // PLACEHOLDER FOR NOW
     }
 
-    updateClassOnLike(event) {
-        let card = document.querySelector(".profileCard");
+    updateClassOnLikePet(event) {
+        let card = document.querySelector(".profileCardPet");
         card.className += ' profileLikeAnimate';
         setTimeout(() => {
-            card.className = 'card profileCard'; }, 1000);
+            card.className = 'card profileCardPet';
+        }, 1000);
     }
 
-    updateClassOnNope(event) {
-        let card = document.querySelector(".profileCard");
+    updateClassOnLikeOwner(event) {
+        let card = document.querySelector(".profileCardOwner");
+        card.className += ' profileLikeAnimate';
+        setTimeout(() => {
+            card.className = 'card profileCardOwner';
+        }, 1000);
+    }
+
+    updateClassOnNopePet(event) {
+        let card = document.querySelector(".profileCardPet");
         card.className += ' profileNopeAnimate';
         setTimeout(() => {
-            card.className = 'card profileCard'; }, 1000);
+            card.className = 'card profileCardPet';
+        }, 1000);
+    }
+
+    updateClassOnNopeOwner(event) {
+        let card = document.querySelector(".profileCardOwner");
+        card.className += ' profileNopeAnimate';
+        setTimeout(() => {
+            card.className = 'card profileCardOwner';
+        }, 1000);
+    }
+
+    updateClassOnSwitch(event, isPet) {
+        // if (this.props.displayOwner) {
+        //     document.querySelector(".card-flipper").classList.toggle("flip");
+        //     console.log('flipped');
+        // }
+        // else {
+        //     document.querySelector(".card-flipper").classList.toggle("flipBack");
+        //     console.log('flipped');
+        // }
+
+        if (isPet) {
+            document.querySelector(".card-flipper").classList.toggle("flipper");
+            // setTimeout(() => {
+            //     document.querySelector(".card-flipper").classList.toggle("flipper");
+            // }, 600);
+            console.log('flipped');
+        }
+        else {
+            document.querySelector(".card-flipper").classList.toggle("flipBack");
+            // setTimeout(() => {
+            //     document.querySelector(".card-flipper").classList.toggle("flipBack");
+            // }, 600);
+            console.log('flipped');
+        }
+
+           // document.querySelector(".card-flipper").classList.toggle("flipper"); // KINDA GOOD 
+
+
+        // if (isPet) {
+        //     let card = document.querySelector(".card-flipper");
+        //     card.className = 'card-flipper flip';
+        //     setTimeout(() => {
+        //         card.className = 'card-flipper';
+        //     }, 600);
+        //     console.log('flipped');
+        // }
+        // else {
+        //     let card = document.querySelector(".card-flipper");
+        //     card.className = 'card-flipper flipBack';
+        //     setTimeout(() => {
+        //         card.className = 'card-flipper';
+        //     }, 600);
+        //     console.log('flipped back');
+        // }
+
+        // document.querySelector(".card-flipper").classList.toggle("flip");
+        // console.log('flipped');
+        
+
     }
 
     render() {
@@ -93,10 +162,16 @@ export default class Card extends Component {
         // If empty (no object), display "No More Users in Area" message
         // Create carousal pictures
         let dogObj = this.props.dog;
+        let ownerObj = this.props.owner;
 
-        
-        let carouselItems = dogObj.images.map(function (img) {
+
+        let petCarouselItems = dogObj.images.map(function (img) {
             let obj = { src: '../' + img, altText: dogObj.name, caption: '' };
+            return obj;
+        })
+
+        let ownerCarouselItems = ownerObj.images.map(function (img) {
+            let obj = { src: '../' + img, altText: ownerObj.name, caption: '' };
             return obj;
         })
 
@@ -110,36 +185,69 @@ export default class Card extends Component {
         // );
         return (
             <div className="d-flex justify-content-center">
-                { this.state.loading ?  <div>Loading...</div> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
-                <div className={"card profileCard "/* + cardAnimation*/}>
-                    <UncontrolledCarousel
-                        items={carouselItems}
-                        indicators={true}
-                        controls={true}
-                        autoPlay={false}>
-                        <CarouselItem cssModule={{width: '100%'}}/>
-                    </UncontrolledCarousel>
-                    <div className="card-body">
-                        <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
-                        <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
-                        <p className='card-text bio'>{dogObj.bio}</p>
-                        <div className='row'>
-                            <div className='col justify-content-center'> 
-                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
-                                    {this.props.onNopeCallback(event); this.updateClassOnNope(event); this.props.cardResetCallback(event);}}>
-                                </button>
+                {this.state.loading ? <div>Loading...</div> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
+                    <div className="card-flipper">
+                        <div className="flip">
+                            <div className='petSide'>
+                                <div className={"card profileCardPet "/* + cardAnimation*/}>
+                                    <UncontrolledCarousel
+                                        items={petCarouselItems}
+                                        indicators={true}
+                                        controls={true}
+                                        autoPlay={false}>
+                                        <CarouselItem cssModule={{ width: '100%' }} />
+                                    </UncontrolledCarousel>
+                                    <div className="card-body">
+                                        <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
+                                        <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
+                                        <p className='card-text bio'>{dogObj.bio}</p>
+                                        <div className='row'>
+                                            <div className='col justify-content-center'>
+                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => { this.props.onNopeCallback(event); this.updateClassOnNopePet(event); this.props.cardResetCallback(event); }}>
+                                                </button>
+                                            </div>
+                                            <div className='col justify-content-center'>
+                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => {/* this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, true)}}></button>
+                                            </div>
+                                            <div className='col justify-content-center'>
+                                                <button className={css(styles.btnLike)} onClick={(event) => { this.props.onLikeCallback(event); this.updateClassOnLikePet(event); this.props.cardResetCallback(event); }}>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className='col justify-content-center'>
-                                <button className={css(styles.btnLike, styles.btnOwner)}></button>
-                            </div>
-                            <div className='col justify-content-center'>
-                                <button className={css(styles.btnLike)} onClick={(event) => 
-                                    {this.props.onLikeCallback(event); this.updateClassOnLike(event); this.props.cardResetCallback(event);}}>
-                                </button>
+                            <div className='ownerSide'>
+                                <div className={"card profileCardOwner "/* + cardAnimation*/}>
+                                    <UncontrolledCarousel
+                                        items={ownerCarouselItems}
+                                        indicators={true}
+                                        controls={true}
+                                        autoPlay={false}>
+                                        <CarouselItem cssModule={{ width: '100%' }} />
+                                    </UncontrolledCarousel>
+                                    <div className="card-body">
+                                        <h3 className="card-title name">{ownerObj.name + ', ' + ownerObj.age}</h3>
+                                        <p className="card-text breed">{ownerObj.sex + ', ' + ownerObj.occupation}</p>
+                                        <p className='card-text bio'>{ownerObj.bio}</p>
+                                        <div className='row'>
+                                            <div className='col justify-content-center'>
+                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => { this.props.onNopeCallback(event); this.updateClassOnNopeOwner(event); this.props.cardResetCallback(event); }}>
+                                                </button>
+                                            </div>
+                                            <div className='col justify-content-center'>
+                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => { /*this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, false)}}></button>
+                                            </div>
+                                            <div className='col justify-content-center'>
+                                                <button className={css(styles.btnLike)} onClick={(event) => { this.props.onLikeCallback(event); this.updateClassOnLikeOwner(event); this.props.cardResetCallback(event); }}>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> }
+                    </div>}
             </div>
         );
     }
