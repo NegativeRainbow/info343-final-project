@@ -52,12 +52,13 @@ export default class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            morePets: this.props.morePets,
         }
     }
 
     componentDidMount() {
         this.setState({ loading: false }); // PLACEHOLDER FOR NOW
+        console.log("more pets: " + this.props.morePets);
     }
 
     // Performs Like Animation on Pet Card
@@ -127,7 +128,7 @@ export default class Card extends Component {
 
         return (
             <div className="d-flex justify-content-center">
-                {this.state.loading ? <div>Loading...</div> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
+                {this.state.morePets ? <Pulser /> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
                     <div className="card-flipper">
                         <div className="flip">
                             <div className='petSide'>
@@ -209,6 +210,22 @@ export default class Card extends Component {
                         </div>
                     </div>}
             </div>
+        );
+    }
+}
+
+class Pulser extends Component {
+    render() {
+        return (
+        <div className="test-container">
+            <div className="search-anim">
+            </div>
+            <div className="search-anim2">
+            </div>
+            <div className="profPic">
+            </div>
+            <p>No More Puppers in Your Area!</p>
+        </div>
         );
     }
 }
