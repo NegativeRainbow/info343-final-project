@@ -111,15 +111,15 @@ class App extends Component {
     this.allConvoRef.off();
     this.unregisterFunction();
   }
+  // petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio
 
-  handleSignUp(email, password, handle, avatar) {
+  handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio) {
     this.setState({ errorMessage: null });
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user1) => {
-        this.pushUserNode(user1.uid, this.createUserNode());
-        // return user1.updateProfile({
-        //   displayName: handle,
-        // })
+        let newNode = this.createUserNode(petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio);
+        this.pushUserNode(user1.uid, newNode.bio, newNode.pet, newNode.owner);
+      
       })
       .catch((err) => this.setState({ errorMessage: err.message }));
 
@@ -144,12 +144,16 @@ class App extends Component {
     }
   }
 
-  pushUserNode(inputUser, userData) {
+  pushUserNode(inputUser, bio, petData, ownerData) {
     this.userRef = firebase.database().ref('users/' + inputUser);
     // this.userRef.push(inputUser.displayName);
-    this.userRef.push(userData);
-     
-
+    this.userRef.set({
+      bio: bio,
+      pet: petData,
+      owner: ownerData,
+      noSwipes: ['placeholder'],
+      yesSwipes: ['placeholder']
+    })
   }
 
   handleSignIn(email, password) {
