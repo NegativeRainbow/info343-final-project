@@ -3,6 +3,8 @@ import './App.css';
 import { UncontrolledCarousel, CarouselItem } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite';
 
+
+// Aphrodite Style Sheet
 // Button URLS from https://codepen.io/arjentienkamp/
 const styles = StyleSheet.create({
     btnLike: {
@@ -58,6 +60,7 @@ export default class Card extends Component {
         this.setState({ loading: false }); // PLACEHOLDER FOR NOW
     }
 
+    // Performs Like Animation on Pet Card
     updateClassOnLikePet(event) {
         let card = document.querySelector(".profileCardPet");
         card.className += ' profileLikeAnimate';
@@ -66,6 +69,7 @@ export default class Card extends Component {
         }, 1000);
     }
 
+    // Performs Like Animation on Owner Card
     updateClassOnLikeOwner(event) {
         let card = document.querySelector(".profileCardOwner");
         card.className += ' profileLikeAnimate';
@@ -74,6 +78,7 @@ export default class Card extends Component {
         }, 1000);
     }
 
+    // Performs Nope Animation on Pet Card
     updateClassOnNopePet(event) {
         let card = document.querySelector(".profileCardPet");
         card.className += ' profileNopeAnimate';
@@ -82,6 +87,7 @@ export default class Card extends Component {
         }, 1000);
     }
 
+    // Performs Nope Animation on Owner Card
     updateClassOnNopeOwner(event) {
         let card = document.querySelector(".profileCardOwner");
         card.className += ' profileNopeAnimate';
@@ -90,6 +96,7 @@ export default class Card extends Component {
         }, 1000);
     }
 
+    // Performs Flip Animaton on Switch
     updateClassOnSwitch(event, isPet) {
         if (isPet) {
             let card = document.querySelector(".card-flipper");
@@ -104,13 +111,9 @@ export default class Card extends Component {
     }
 
     render() {
-        //TO-DO:
-        // Grab current dog object (or current profile) from firebase
-        // If empty (no object), display "No More Users in Area" message
-        // Create carousal pictures
+        // For ease of use
         let dogObj = this.props.dog;
         let ownerObj = this.props.owner;
-
 
         let petCarouselItems = dogObj.images.map(function (img) {
             let obj = { src: '../' + img, altText: dogObj.name, caption: '' };
@@ -122,21 +125,13 @@ export default class Card extends Component {
             return obj;
         })
 
-        // if (this.props.liked) {
-        //     this.updateClassOnLike();
-        // }
-
-        // let cardAnimation = css(
-        //     this.props.liked && styles.cardLike,
-        //     this.props.disliked && styles.cardNope
-        // );
         return (
             <div className="d-flex justify-content-center">
                 {this.state.loading ? <div>Loading...</div> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
                     <div className="card-flipper">
                         <div className="flip">
                             <div className='petSide'>
-                                <div className={"card profileCardPet "/* + cardAnimation*/}>
+                                <div className={"card profileCardPet"}>
                                     <div className={css(styles.carouselWrap)}>
                                         <UncontrolledCarousel
                                             items={petCarouselItems}
@@ -152,14 +147,21 @@ export default class Card extends Component {
                                         <p className='card-text bio'>{dogObj.bio}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => { this.props.onNopeCallback(event); this.updateClassOnNopePet(event); this.props.cardResetCallback(event); }}>
+                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
+                                                    { this.props.onNopeCallback(event); 
+                                                      this.updateClassOnNopePet(event); 
+                                                      this.props.cardResetCallback(event); }}>
                                                 </button>
                                             </div>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => {/* this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, true) }}></button>
+                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => 
+                                                    { this.updateClassOnSwitch(event, true) }}></button>
                                             </div>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike)} onClick={(event) => { this.props.onLikeCallback(event); this.updateClassOnLikePet(event); this.props.cardResetCallback(event); }}>
+                                                <button className={css(styles.btnLike)} onClick={(event) => 
+                                                    { this.props.onLikeCallback(event); 
+                                                      this.updateClassOnLikePet(event); 
+                                                      this.props.cardResetCallback(event); }}>
                                                 </button>
                                             </div>
                                         </div>
@@ -183,14 +185,21 @@ export default class Card extends Component {
                                         <p className='card-text bio'>{ownerObj.bio}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => { this.props.onNopeCallback(event); this.updateClassOnNopeOwner(event); this.props.cardResetCallback(event); }}>
+                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
+                                                    { this.props.onNopeCallback(event); 
+                                                      this.updateClassOnNopeOwner(event); 
+                                                      this.props.cardResetCallback(event); }}>
                                                 </button>
                                             </div>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => { /*this.props.onSwitchCallback(event); */this.updateClassOnSwitch(event, false) }}></button>
+                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => 
+                                                    { this.updateClassOnSwitch(event, false) }}></button>
                                             </div>
                                             <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike)} onClick={(event) => { this.props.onLikeCallback(event); this.updateClassOnLikeOwner(event); this.props.cardResetCallback(event); }}>
+                                                <button className={css(styles.btnLike)} onClick={(event) => 
+                                                    { this.props.onLikeCallback(event); 
+                                                      this.updateClassOnLikeOwner(event); 
+                                                      this.props.cardResetCallback(event); }}>
                                                 </button>
                                             </div>
                                         </div>
