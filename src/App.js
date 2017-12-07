@@ -279,7 +279,8 @@ class App extends Component {
                   cardResetCallback={(event) => this.cardReset(event)}
                   liked={this.state.liked}
                   disliked={this.state.disliked}
-                  newCard={this.state.newCard} />
+                  newCard={this.state.newCard} 
+                  noMorePets={true} /*SET TO TRUE TO DISPLAY PULSER*//>
               } />
 
               <Route path='/conversations' component={() =>

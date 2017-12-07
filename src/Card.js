@@ -52,7 +52,7 @@ export default class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            morePets: this.props.morePets,
+            morePets: this.props.noMorePets,
         }
     }
 
@@ -128,7 +128,7 @@ export default class Card extends Component {
 
         return (
             <div className="d-flex justify-content-center">
-                {this.state.morePets ? <Pulser /> : //UPDATE LOADING TO INCLUDE LOGO + ANIMATIONS
+                {this.state.morePets ? <Pulser /> :
                     <div className="card-flipper">
                         <div className="flip">
                             <div className='petSide'>
@@ -170,7 +170,7 @@ export default class Card extends Component {
                                 </div>
                             </div>
                             <div className='ownerSide'>
-                                <div className={"card profileCardOwner "/* + cardAnimation*/}>
+                                <div className={"card profileCardOwner"}>
                                     <div className={css(styles.carouselWrap)}>
                                         <UncontrolledCarousel
                                             items={ownerCarouselItems}
