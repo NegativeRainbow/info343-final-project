@@ -326,7 +326,7 @@ class App extends Component {
       this.setState({ potentialSwipes: newRef });
       // this.setCurrentViewNode();
       this.filterFunc();
-    }, 700);
+    }, 1000);
     console.log('nope');
   }
 
@@ -335,7 +335,7 @@ class App extends Component {
   cardReset(event) {
     setTimeout(() => {
       this.setState({ liked: false, disliked: false });
-    }, 700);
+    }, 1000);
 
     console.log('reset');
   }
@@ -422,7 +422,8 @@ class MatchCard extends Component {
   render() {
     return (
       <div>
-          <button className="btn btn-warning">{this.props.matchName}</button>
+          <div>
+            </div>
       </div>
     );
   }
