@@ -6,7 +6,7 @@ import { Chatroom } from './chatroom.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
 import DogMap from './DogMap';
@@ -119,7 +119,7 @@ class App extends Component {
                   this.setCurrentViewNode();
                 }
                 // this.setCurrentViewNode();
-                //console.log(this.state.currentViewedProfile, this.state.potentialSwipes);
+                console.log(this.state.currentViewedProfile, this.state.potentialSwipes);
 
 
               })
@@ -265,7 +265,7 @@ class App extends Component {
           .then((snapshot) => {
             firebase.database().ref('users/' + user2ID).once('value')
               .then((snapshot2) => {
-                //console.log(snapshot2.val());
+                console.log(snapshot2.val());
                 return {
                   name: snapshot2.val().pet.name,
                   img: snapshot2.val().pet.imgs[0]
@@ -287,7 +287,7 @@ class App extends Component {
         .then((snapshot) => {
           firebase.database().ref('users/' + this.state.user.uid).once('value')
             .then((snapshot2) => {
-              //console.log(snapshot2.val());
+              console.log(snapshot2.val());
               return {
                 name: snapshot2.val().pet.name,
                 img: snapshot2.val().pet.imgs[0]
@@ -306,12 +306,12 @@ class App extends Component {
   }
 
   checkLikes(user2ID) {
-    //console.log(this.state.potentialSwipes[0]);
+    console.log(this.state.potentialSwipes[0]);
     firebase.database().ref('users/' + user2ID +'/yesSwipes').once('value')
     .then((snapshot) =>{
-      //console.log(snapshot.val());
+      console.log(snapshot.val());
       if (Object.values(snapshot.val()).includes(this.state.user.uid)) {
-        //console.log(user2ID);
+        console.log(user2ID);
         this.createConversation(user2ID);
       }
     })
@@ -321,7 +321,7 @@ class App extends Component {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
-      //console.log(this.state.potentialSwipes[0]);
+      console.log(this.state.potentialSwipes[0]);
       this.checkLikes(this.state.potentialSwipes[0]);
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
@@ -330,7 +330,7 @@ class App extends Component {
 
     }, 700);
 
-    //console.log('liked');
+    console.log('liked');
   }
 
   onNope(event) {
@@ -342,7 +342,7 @@ class App extends Component {
       // this.setCurrentViewNode();
       this.filterFunc();
     }, 1000);
-    //console.log('nope');
+    console.log('nope');
   }
 
   matchCardMap(){
@@ -368,7 +368,7 @@ class App extends Component {
       this.setState({ liked: false, disliked: false });
     }, 1000);
 
-    //console.log('reset');
+    console.log('reset');
   }
 
 
@@ -399,11 +399,7 @@ class App extends Component {
           <div className="border col-2 px-0">
             <div className="container">
               <h2>Matches {'<3'}</h2>
-              {this.state.chatObjs.map((chat) => {
-                return <MatchCard name={chat.name} image={chat.img} />
-              })
-              }
-              {/* {this.matchCardMap()} */}
+              {}
               {/* <MatchCard name="butt" image="img/joel.jpg" />
               <MatchCard name="butt" image="img/joel.jpg" /> */}
             </div>
@@ -433,16 +429,6 @@ class App extends Component {
 
             </Switch>
           </div>
-          <span aria-label="Map Button" className="btn btn-secondary">
-            <Link to={'/map'}>
-            Go to Map
-            </Link>
-          </span>
-          <span aria-label="Conversations Button" className="btn btn-secondary">
-            <Link to='/conversations'>
-            Go to Conversations
-            </Link>
-          </span>
           <button aria-label="Log Out Button" className="btn btn-warning"
             onClick={() => this.handleSignOut()}>
             Log Out {this.state.user.displayName}
