@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { compose, withProps, withStateHandlers } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { compose, withProps } from "recompose";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 let parkData = require('./parks.json').results;
 console.log(parkData);
 
@@ -16,7 +16,9 @@ const MyMapComponent = compose(
 )((props) =>
     <GoogleMap defaultZoom={10} defaultCenter={{ lat: 47.6062, lng: -122.3321 }}>
     {props.parks.map((park) => {return(
-      <Marker key={park.name} position={{ lat: park.geometry.location.lat, lng: park.geometry.location.lng }} />
+      <InfoWindow key={park.name} position={{ lat: park.geometry.location.lat, lng: park.geometry.location.lng }}>
+      <span>{park.name + ': ' +park.formatted_address}</span>
+      </InfoWindow>
     )})}
     </GoogleMap>
 )
