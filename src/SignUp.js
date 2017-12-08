@@ -24,7 +24,9 @@ class SignUpForm extends Component {
             ownerName: undefined,
             ownerImg: undefined,
             ownerAge: undefined,
-            userBio: undefined,
+            ownerOcc: undefined,
+            
+            userBio: undefined
         }; 
     }
   
@@ -97,6 +99,8 @@ class SignUpForm extends Component {
         let ownerNameErrors = this.validate(this.state.ownerName, { required: true, lettersOnly: true });
         let ownerImgErrors = this.validate(this.state.ownerImg, { required: true});
         let ownerAgeErrors = this.validate(this.state.ownerAge, { required: true, integer: true});
+        let ownerOccErrors = this.validate(this.state.ownerOcc, { required: true, lettersOnly: true});
+        
 
         let emailValid = undefined;
         let passwordValid = undefined;
@@ -108,7 +112,7 @@ class SignUpForm extends Component {
         let ownerNameValid = undefined;
         let ownerImgValid = undefined;
         let ownerAgeValid = undefined;
-        let userBioValid = undefined;
+        let ownerOccValid = undefined;
         let signUpButton = true;
 
 
@@ -164,6 +168,11 @@ class SignUpForm extends Component {
         } else if (ownerAgeErrors !== undefined && ownerAgeErrors.length !== 0) {
             ownerAgeValid = false;
         }
+        if (ownerOccErrors !== undefined && ownerOccErrors.length === 0) {
+            ownerOccValid = true;
+        } else if (ownerOccErrors !== undefined && ownerOccErrors.length !== 0) {
+            ownerOccValid = false;
+        }
 
         let emailForm = false;
         if (emailValid === false && emailErrors !== undefined && emailErrors.length > 0) {
@@ -214,7 +223,12 @@ class SignUpForm extends Component {
             ownerAgeForm = true;
         }
 
-        if (emailValid && passwordValid && petNameValid && petImgValid && petGenderValid && petAgeValid && petBreedValid && ownerNameValid && ownerAgeValid && ownerImgValid) {
+        let ownerOccForm = false;
+        if (ownerOccValid === false && ownerOccErrors !== undefined && ownerOccErrors.length > 0) {
+            ownerOccForm = true;
+        }
+
+        if (emailValid && passwordValid && petNameValid && petImgValid && petGenderValid && petAgeValid && petBreedValid && ownerNameValid && ownerAgeValid && ownerImgValid && ownerOccForm) {
             signUpButton = false;
         }
 
@@ -327,6 +341,18 @@ class SignUpForm extends Component {
                     })}
                 </FormGroup>
 
+
+                < FormGroup >
+                    <Label for="ownerOcc">Owner Occupation</Label>
+                    <Input valid={petImgValid} onChange={(event) => this.handleChange(event)} id="ownerOcc"
+                        type="ownerOcc"
+                        name="ownerOcc"
+                    />
+                    {ownerOccForm === true && ownerOccErrors.map((error) => {
+                        return <FormFeedback key={error}>{error}</FormFeedback>
+                    })}
+                </FormGroup>
+
                 < FormGroup >
                     <Label for="userBio">Write a Bio!</Label>
                     <Input onChange={(event) => this.handleChange(event)} id="userBio"
@@ -352,7 +378,7 @@ class SignUpApp extends React.Component {
         this.state = {};
     }
 
-    handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio) {
+    handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge,ownerOcc, userBio) {
         this.setState({ alert: `Signing up: '${email}'. User's name is '${ownerName}' with pet '${petName}'.` });
     }
 
@@ -362,7 +388,7 @@ class SignUpApp extends React.Component {
                 {this.state.alert !== undefined ?
                     <Alert color="success">{this.state.alert}</Alert> :
                     <SignUpForm
-                        signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB)} 
+                        signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, oO, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA,oO, uB)} 
                     />
                 }
             </div>

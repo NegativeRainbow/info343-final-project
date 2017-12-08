@@ -138,11 +138,11 @@ class App extends Component {
     this.unregisterFunction();
   }
 
-  handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio) {
+  handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio) {
     this.setState({ errorMessage: null });
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user1) => {
-        let newNode = this.createUserNode(petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio);
+        let newNode = this.createUserNode(petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio);
         this.pushUserNode(user1.uid, newNode.bio, newNode.pet, newNode.owner);
       
       })
@@ -151,7 +151,7 @@ class App extends Component {
   }
 
   /* Potentially add in preferences */
-  createUserNode(petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio) {
+  createUserNode(petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, ownerOccupation, userBio) {
     return {
       pet: {
         name: petName,
@@ -163,7 +163,8 @@ class App extends Component {
       owner: {
         name: ownerName,
         imgs: [ownerImgs],
-        age: ownerAge
+        age: ownerAge,
+        occupation: ownerOccupation
       },
       bio: userBio
     }
@@ -253,21 +254,7 @@ class App extends Component {
     console.log('nope');
   }
 
-  // onSwitch(event) {
-  //   setTimeout(() => {
-  //     this.setState({ liked: false, disliked: false});
-    
-  //   if (this.state.owner) {
-  //     this.setState({owner: false});
-  //   }
-  //   else {
-  //     this.setState({owner: true});
-  //   }
-  // }, 700);
-  //   // this.setState(this.state.owner ? { owner: false } : { owner: true });
-  //   console.log('swapped');
-  //   console.log(this.state.owner);
-  //   }
+ 
 
   cardReset(event) {
     setTimeout(() => {
@@ -285,7 +272,7 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route path='/join' component={() =>
-              <SignUpForm signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA, uB)} />
+              <SignUpForm signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, oO, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA, oO, uB)} />
             } />
             <Route path='/login' component={() =>
               <SignInForm signInCallback={(e, p) => this.handleSignIn(e, p)} />
