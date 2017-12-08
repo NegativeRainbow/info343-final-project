@@ -276,7 +276,7 @@ class App extends Component {
   }
 
   checkLikes(user2ID) {
-    console.log(this.state.potentialSwipes);
+    console.log(this.state.potentialSwipes[0]);
     firebase.database().ref('users/' + user2ID +'/yesSwipes').once('value')
     .then((snapshot) =>{
       console.log(snapshot.val());
@@ -292,7 +292,7 @@ class App extends Component {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
       console.log(this.state.potentialSwipes[0]);
-      this.checkLikes();
+      this.checkLikes(this.state.potentialSwipes[0]);
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
       // this.setCurrentViewNode();
