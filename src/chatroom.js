@@ -14,7 +14,7 @@ export class Chatroom extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.chatroom);
+        console.log(this.props.user);
         this.props.chatroom.on('value', (snapshot) => {
             let conversationArray = Object.keys(snapshot.val()).map((message) => {
                 return {
@@ -101,7 +101,7 @@ class MessageInput extends Component {
         let newMessage = {
             text: this.state.message,
             userName: this.props.user.name,
-            userPhoto: this.props.user.images[0],
+            userPhoto: this.props.user.imgs[0],
             time: firebase.database.ServerValue.TIMESTAMP
         }
         this.props.chatroom.push(newMessage);
@@ -114,7 +114,7 @@ class MessageInput extends Component {
             <div className="container px-0">
                 <div className="row py-3">
                     <div className="col-1">
-                        <img style={{height:60, width:80}} aria-label={user.Name + "avatar"} className="avatar" src={user.images[0]} alt={user.Name + ' avatar'} />
+                        <img style={{height:60, width:80}} aria-label={user.name + "avatar"} className="avatar" src={user.imgs[0]} alt={user.name + ' avatar'} />
                     </div>
                     <div className="col pl-4 pl-lg-1">
                         <form>

@@ -6,7 +6,7 @@ import { Chatroom } from './chatroom.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
 import DogMap from './DogMap';
@@ -98,6 +98,7 @@ class App extends Component {
       ],
       // owner: false,
       currentViewedProfile: {},
+      currentUser: {},
       pulsing: false,
     };
   }
@@ -136,6 +137,7 @@ class App extends Component {
         this.setState({ user: firebaseUser });
         this.filterFunc();
         this.matchCardMap();
+        this.setCurrentUser();
 
       }
       else {
@@ -143,6 +145,13 @@ class App extends Component {
       }
     });
 
+  }
+
+  setCurrentUser() {
+    firebase.database().ref('users/' + this.state.user.uid).once('value')
+    .then((snapshot) => {
+      this.setState({currentUser: snapshot.val()});
+    });
   }
 
   filterFunc() {
@@ -267,6 +276,7 @@ class App extends Component {
               .then((snapshot2) => {
                 console.log(snapshot2.val());
                 return {
+                  number: val,
                   name: snapshot2.val().pet.name,
                   img: snapshot2.val().pet.imgs[0]
                 }
@@ -289,6 +299,7 @@ class App extends Component {
             .then((snapshot2) => {
               console.log(snapshot2.val());
               return {
+                number: val,
                 name: snapshot2.val().pet.name,
                 img: snapshot2.val().pet.imgs[0]
               }
@@ -327,6 +338,7 @@ class App extends Component {
       this.setState({ potentialSwipes: newRef });
       // this.setCurrentViewNode();
       this.filterFunc();
+      this.matchCardMap();
 
     }, 700);
 
@@ -343,6 +355,10 @@ class App extends Component {
       this.filterFunc();
     }, 1000);
     console.log('nope');
+  }
+
+  onMatch(event) {
+
   }
 
   matchCardMap(){
@@ -399,9 +415,9 @@ class App extends Component {
           <div className="border col-2 px-0">
             <div className="container">
               <h2>Matches {'<3'}</h2>
-              {}
-              {/* <MatchCard name="butt" image="img/joel.jpg" />
-              <MatchCard name="butt" image="img/joel.jpg" /> */}
+              {this.state.chatObjs.map((chat) => {
+                return <Link to={'/conversations/' + chat.number} key={chat}><MatchCard name={chat.name} image={chat.img}/></Link>
+              })}
             </div>
           </div>
 
@@ -417,9 +433,15 @@ class App extends Component {
                 />}
               />
 
-              <Route path='/conversations' component={() =>
+              {/* <Route exact path='/conversations/:chatNumber' component={() =>
                 <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
-              } />
+              } /> */}
+
+              {this.state.chatObjs.map((chat) => {
+                return <Route key={chat} path={'/conversations/' + chat.number} component={() =>
+                  <Chatroom chatroom={firebase.database().ref('allConversations/' + chat.number)} user={this.state.currentUser.pet} />
+                } />
+              })}
 
               <Route path='/map' component={() =>
                 <DogMap />
