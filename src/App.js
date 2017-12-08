@@ -403,4 +403,14 @@ class App extends Component {
   }
 }
 
+class MatchCard extends Component {
+  render() {
+    return (
+      <div>
+          <button className="btn btn-warning">{this.props.matchName}</button>
+      </div>
+    );
+  }
+}
+
 export default App;
