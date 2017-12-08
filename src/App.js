@@ -246,14 +246,18 @@ class App extends Component {
         countRef.set(val);
         var userOneRef = firebase.database().ref('users/' + this.state.user.uid + '/chats');
         var userTwoRef = firebase.database().ref('users/' + this.state.potentialSwipes[0] + '/chats');
+        console.log(this.state.user.uid);
+        console.log(this.state.potentialSwipes[0]);
         userOneRef.once("value")
           .then((snapshot) => {
+            console.log(snapshot.val());
             var chatArray = snapshot.val();
             chatArray.push(val);
             userOneRef.set(chatArray);
           })
         userTwoRef.once("value")
           .then((snapshot) => {
+            console.log(snapshot.val());
             var chatArray = snapshot.val();
             chatArray.push(val);
             userTwoRef.set(chatArray);
@@ -279,6 +283,7 @@ class App extends Component {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
+      console.log(this.potentialSwipes[0]);
       this.checkLikes();
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
