@@ -45,7 +45,7 @@ class SignUpForm extends Component {
             this.state.email, this.state.password,
             this.state.petName, this.state.petImg, this.state.petGender, this.state.petAge, this.state.petBreed,
             this.state.ownerName, this.state.ownerImg, this.state.ownerAge,
-            this.state.userBio);
+            this.state.ownerOcc, this.state.userBio);
     }
 
     validate(value, validations) {
@@ -228,7 +228,7 @@ class SignUpForm extends Component {
             ownerOccForm = true;
         }
 
-        if (emailValid && passwordValid && petNameValid && petImgValid && petGenderValid && petAgeValid && petBreedValid && ownerNameValid && ownerAgeValid && ownerImgValid && ownerOccForm) {
+        if (emailValid && passwordValid && petNameValid && petImgValid && petGenderValid && petAgeValid && petBreedValid && ownerNameValid && ownerAgeValid && ownerImgValid && ownerOccValid) {
             signUpButton = false;
         }
 
@@ -332,7 +332,7 @@ class SignUpForm extends Component {
 
                 < FormGroup >
                     <Label for="ownerAge">Owner Age</Label>
-                    <Input valid={petImgValid} onChange={(event) => this.handleChange(event)} id="ownerAge"
+                    <Input valid={ownerAgeValid} onChange={(event) => this.handleChange(event)} id="ownerAge"
                         type="ownerAge"
                         name="ownerAge"
                     />
@@ -344,7 +344,7 @@ class SignUpForm extends Component {
 
                 < FormGroup >
                     <Label for="ownerOcc">Owner Occupation</Label>
-                    <Input valid={petImgValid} onChange={(event) => this.handleChange(event)} id="ownerOcc"
+                    <Input valid={ownerOccValid} onChange={(event) => this.handleChange(event)} id="ownerOcc"
                         type="ownerOcc"
                         name="ownerOcc"
                     />
@@ -378,7 +378,7 @@ class SignUpApp extends React.Component {
         this.state = {};
     }
 
-    handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge,ownerOcc, userBio) {
+    handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOcc, userBio) {
         this.setState({ alert: `Signing up: '${email}'. User's name is '${ownerName}' with pet '${petName}'.` });
     }
 
@@ -388,7 +388,7 @@ class SignUpApp extends React.Component {
                 {this.state.alert !== undefined ?
                     <Alert color="success">{this.state.alert}</Alert> :
                     <SignUpForm
-                        signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, oO, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA,oO, uB)} 
+                        signUpCallback={(e, p, pN, pI, pG, pA, pB, oN, oI, oA, oO, uB) => this.handleSignUp(e, p, pN, pI, pG, pA, pB, oN, oI, oA, oO, uB)} 
                     />
                 }
             </div>

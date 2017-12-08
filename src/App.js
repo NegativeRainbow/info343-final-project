@@ -92,13 +92,12 @@ class App extends Component {
     var allUserRef = firebase.database().ref('users');
     allUserRef.once('value')
     .then((snapshot) => {
+      if (snapshot.val()) {
       var allUsers = Object.keys(snapshot.val());
       this.setState({potentialSwipes: allUsers});
       if (this.state.potentialSwipes.length > 0) {
-        console.log(this.state.potentialSwipes[0]);
         firebase.database().ref('users/' + this.state.potentialSwipes[0]).once('value')
           .then((snapshot) => {
-            console.log(snapshot.val());
             this.setState({currentViewedProfile: snapshot.val()});
             this.setCurrentViewNode();
 
@@ -106,10 +105,11 @@ class App extends Component {
       } else {
         this.setState({pulsing:true});
       }
+    } else {
+      this.setState({currentViewedProfile:{}, pulsing:true});
+    }
     });
   
-   
-   
     this.unregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         this.setState({ user: firebaseUser });
@@ -139,10 +139,13 @@ class App extends Component {
   }
 
   handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio) {
+    console.log('HANDLE SIGN UP FLAG');
     this.setState({ errorMessage: null });
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user1) => {
+        console.log(userBio);
         let newNode = this.createUserNode(petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio);
+        console.log(newNode);
         this.pushUserNode(user1.uid, newNode.bio, newNode.pet, newNode.owner);
       
       })
@@ -153,33 +156,40 @@ class App extends Component {
   /* Potentially add in preferences */
   createUserNode(petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, ownerOccupation, userBio) {
     return {
-      pet: {
-        name: petName,
-        imgs: [petImgs],
-        gender: petGender,
-        age: petAge,
-        breed: petBreed
+      "pet": {
+        "name": petName,
+        "imgs": [petImgs],
+        "gender": petGender,
+        "age": petAge,
+        "breed": petBreed
       },
-      owner: {
-        name: ownerName,
-        imgs: [ownerImgs],
-        age: ownerAge,
-        occupation: ownerOccupation
+      "owner": {
+        "name": ownerName,
+        "imgs": [ownerImgs],
+        "age": ownerAge,
+        "occupation": ownerOccupation
       },
-      bio: userBio
+      "bio": userBio
     }
   }
 
+  // function writeUserData(userId, name, email, imageUrl) {
+  //   firebase.database().ref('users/' + userId).set({
+  //     username: name,
+  //     email: email,
+  //     profile_picture : imageUrl
+  //   });
+  // }
+
   pushUserNode(inputUser, bio, petData, ownerData) {
-    this.userRef = firebase.database().ref('users/' + inputUser);
-    // this.userRef.push(inputUser.displayName);
-    this.userRef.set({
-      bio: bio,
-      pet: petData,
-      owner: ownerData,
-      noSwipes: ['placeholder'],
-      yesSwipes: ['placeholder'],
-      chats: [0]
+    console.log(bio, petData, ownerData );
+    firebase.database().ref('users/' + inputUser).set({
+      "bio": bio,
+      "pet": petData,
+      "owner": ownerData,
+      "noSwipes": ['placeholder'],
+      "yesSwipes": ['placeholder'],
+      "chats": [0]
     })
   }
 
@@ -330,6 +340,8 @@ class App extends Component {
         <main>
           {content}
         </main>
+
+        
       </div>
     );
   }

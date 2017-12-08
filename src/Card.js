@@ -183,7 +183,11 @@ export default class Card extends Component {
                                     </div>
                                     <div className="card-body">
                                         <h3 className="card-title name">{ownerObj.name + ', ' + ownerObj.age}</h3>
+<<<<<<< HEAD
                                         <p className="card-text breed">{ownerObj.occupation}</p>
+=======
+                                        <p className="card-text breed">{ownerObj.occupation}</p>
+>>>>>>> fixed broken
                                         <p className='card-text bio'>{this.props.user.bio}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
