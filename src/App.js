@@ -91,46 +91,79 @@ class App extends Component {
   componentDidMount() {
     var allUserRef = firebase.database().ref('users');
     allUserRef.once('value')
-    .then((snapshot) => {
-      if (snapshot.val()) {
-      var allUsers = Object.keys(snapshot.val());
-      this.setState({potentialSwipes: allUsers});
-      if (this.state.potentialSwipes.length > 0) {
-        firebase.database().ref('users/' + this.state.potentialSwipes[0]).once('value')
-          .then((snapshot) => {
-            this.setState({currentViewedProfile: snapshot.val()});
-            this.setCurrentViewNode();
+      .then((snapshot) => {
+        if (snapshot.val()) {
+          var allUsers = Object.keys(snapshot.val());
+          this.setState({ potentialSwipes: allUsers });
+          if (this.state.potentialSwipes.length > 0) {
+            firebase.database().ref('users/' + this.state.potentialSwipes[0]).once('value')
+              .then((snapshot) => {
+                if (this.state.user) {
+                  this.filterFunc();
+                } else {
+                  this.setState({ currentViewedProfile: snapshot.val() });
+                  this.setCurrentViewNode();
+                }
+                // this.setCurrentViewNode();
+                console.log(this.state.currentViewedProfile, this.state.potentialSwipes);
+                
 
-          })
-      } else {
-        this.setState({pulsing:true});
-      }
-    } else {
-      this.setState({currentViewedProfile:{}, pulsing:true});
-    }
-    });
-  
+              })
+          } else {
+            this.setState({ pulsing: true });
+          }
+        } else {
+          this.setState({ currentViewedProfile: {}, pulsing: true });
+        }
+      });
+
     this.unregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         this.setState({ user: firebaseUser });
+        this.filterFunc();
+        
       }
       else {
         this.setState({ user: null });
       }
     });
-    
+
   }
 
-  setCurrentViewNode(){
+  filterFunc() {
+    var yesSwipesRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes').once('value')
+      .then((snapshot) => {
+        return Object.values(snapshot.val());
+      })
+      .then((val) => {
+        var noSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/noSwipes').once('value')
+          .then((snapshot) => {
+            return Object.values(snapshot.val());
+          })
+          .then((value) => {
+            var allYesandNo = value.concat(val);
+            var truncatedArray = this.state.potentialSwipes;
+            truncatedArray = truncatedArray.filter((userid) => {
+              if (this.state.user.uid !== userid) {
+                return allYesandNo.indexOf(userid) < 0;
+              }
+            });
+            this.setState({potentialSwipes: truncatedArray});
+            this.setCurrentViewNode();
+            // console.log(truncatedArray);
+            // console.log(this.state.potentialSwipes);
+          })
+      });
+  }
+  setCurrentViewNode() {
     if (this.state.potentialSwipes.length > 0) {
-      var findUserRef =  firebase.database().ref('users/' + this.state.potentialSwipes[0]);
+      var findUserRef = firebase.database().ref('users/' + this.state.potentialSwipes[0]);
       findUserRef.once('value')
         .then((snapshot) => {
-          console.log(snapshot.val());
-          this.setState({currentViewedProfile: snapshot.val(), userFetchLoading:false});
+          this.setState({ currentViewedProfile: snapshot.val(), userFetchLoading: false });
         })
     } else {
-      this.setState({pulsing:true});
+      this.setState({ pulsing: true });
     }
   }
 
@@ -139,15 +172,12 @@ class App extends Component {
   }
 
   handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio) {
-    console.log('HANDLE SIGN UP FLAG');
     this.setState({ errorMessage: null });
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user1) => {
-        console.log(userBio);
         let newNode = this.createUserNode(petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio);
-        console.log(newNode);
         this.pushUserNode(user1.uid, newNode.bio, newNode.pet, newNode.owner);
-      
+
       })
       .catch((err) => this.setState({ errorMessage: err.message }));
 
@@ -182,7 +212,6 @@ class App extends Component {
   // }
 
   pushUserNode(inputUser, bio, petData, ownerData) {
-    console.log(bio, petData, ownerData );
     firebase.database().ref('users/' + inputUser).set({
       "bio": bio,
       "pet": petData,
@@ -204,50 +233,60 @@ class App extends Component {
     firebase.auth().signOut()
       .catch((err) => this.setState({ errorMessage: err.message }))
   }
-    
+
   createConversation() {
     var countRef = firebase.database().ref('conversationCount');
     countRef.once("value")
-    .then(function(snapshot) {
-      var val = snapshot.val();
-      val = val + 1;
-      return val;
-    })
-    .then((val) => {
-      countRef.set(val);
-      var userOneRef = firebase.database().ref('users/' + 'bOvylagcPnSmQy7PYGnPF5lEKcx2'+ '/chats');
-      var userTwoRef = firebase.database().ref('users/' + 'VAqylQwgL6MQODihTTR75u3zesd2' + '/chats');
-      userOneRef.once("value")
-      .then((snapshot) => {
-        console.log(snapshot.val());
-        var chatArray = snapshot.val();
-        chatArray.push(val);        
-        userOneRef.set(chatArray);
+      .then(function (snapshot) {
+        var val = snapshot.val();
+        val = val + 1;
+        return val;
       })
-      userTwoRef.once("value")
-      .then((snapshot) => {
-        var chatArray = snapshot.val();
-        chatArray.push(val);
-        userTwoRef.set(chatArray);
-      })
-      var createdConvo = firebase.database().ref('allConversations/' + val);
-      createdConvo.push('[Conversation Start Placeholder]');
+      .then((val) => {
+        countRef.set(val);
+        var userOneRef = firebase.database().ref('users/' + this.state.user.uid + '/chats');
+        var userTwoRef = firebase.database().ref('users/' + this.state.potentialSwipes[0] + '/chats');
+        userOneRef.once("value")
+          .then((snapshot) => {
+            var chatArray = snapshot.val();
+            chatArray.push(val);
+            userOneRef.set(chatArray);
+          })
+        userTwoRef.once("value")
+          .then((snapshot) => {
+            var chatArray = snapshot.val();
+            chatArray.push(val);
+            userTwoRef.set(chatArray);
+          })
+        var createdConvo = firebase.database().ref('allConversations/' + val);
+        createdConvo.push('[Conversation Start Placeholder]');
 
-    });
+      });
 
   }
 
-
+  checkLikes() {
+    firebase.database().ref('users/' + this.state.potentialSwipes[0] +'/yesSwipes').once('value')
+    .then((snapshot) =>{
+      console.log(snapshot.val());
+      if (Object.values(snapshot.val()).includes(this.state.user.uid)) {
+        this.createConversation();
+      }
+    })
+  }
 
   onLike(event) {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
-      this.setState((prevState) => {potentialSwipes: prevState.potentialSwipes.slice(1)});
-      /* need to change currentPet to potentialSwipe.pet at the 0 index*/
-      this.setCurrentViewNode();
-      // this.setState({ liked: true, currentPet: this.state.currentPet + 1});
+      this.checkLikes();
+      var newRef = this.state.potentialSwipes.slice(1);
+      this.setState({ potentialSwipes: newRef });
+      // this.setCurrentViewNode();
+      this.filterFunc();
+      
     }, 700);
+    
     console.log('liked');
   }
 
@@ -255,15 +294,15 @@ class App extends Component {
     setTimeout(() => {
       var userNoSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/noSwipes');
       userNoSwipeRef.push(this.state.potentialSwipes[0]);
-      this.setState((prevState) => {potentialSwipes: prevState.potentialSwipes.slice(1)});
-      this.setCurrentViewNode();
-      /* need to change currentPet to potentialSwipe.pet at the 0 index*/
-      // this.setState({ disliked: true, currentPet: this.state.currentPet + 1 });
+      var newRef = this.state.potentialSwipes.slice(1);
+      this.setState({ potentialSwipes: newRef });
+      // this.setCurrentViewNode();
+      this.filterFunc();
     }, 700);
     console.log('nope');
   }
 
- 
+
 
   cardReset(event) {
     setTimeout(() => {
@@ -294,23 +333,22 @@ class App extends Component {
 
       )
 
-    } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading){
-      {console.log(this.state.potentialSwipes)};
+    } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading) {
       content = (
         <div className='row'>
           <div className="border col-2">
           </div>
           <div className="container col-10">
             <Switch>
-              <Route path='/swipe' component={() => 
+              <Route path='/swipe' component={() =>
                 <Card user={this.state.currentViewedProfile}
                   onLikeCallback={(event) => this.onLike(event)}
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
                   cardResetCallback={(event) => this.cardReset(event)}
                   noMorePets={this.state.pulsing}
-                   /> }
-               />
+                />}
+              />
 
               <Route path='/conversations' component={() =>
                 <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
@@ -328,7 +366,7 @@ class App extends Component {
           </button>
         </div>
       )
-    } else {
+    } else { 
       content = (
         <div className='row'>
         </div>
@@ -343,7 +381,7 @@ class App extends Component {
           {content}
         </main>
 
-        
+
       </div>
     );
   }

@@ -147,7 +147,6 @@ export default class Card extends Component {
                                         <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
                                         <p className="card-text breed">{dogObj.gender + ', ' + dogObj.breed}</p>
                                         <p className='card-text bio'>{this.props.user.bio}</p>
-                                        <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
                                                 <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
