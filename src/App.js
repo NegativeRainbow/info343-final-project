@@ -333,6 +333,7 @@ class App extends Component {
             <Route exact path='/' component={() =>
               <SignInForm signInCallback={(e, p) => this.handleSignIn(e, p)} />
             } />
+            <Redirect exact to='/' />
           </Switch>
         </div>
 
@@ -362,6 +363,8 @@ class App extends Component {
               <Route path='/map' component={() =>
                 <DogMap />
               } />
+
+              <Redirect to='/swipe' />
 
             </Switch>
           </div>
