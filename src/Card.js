@@ -115,14 +115,14 @@ export default class Card extends Component {
         // For ease of use
         let dogObj = this.props.dog;
         let ownerObj = this.props.owner;
-
+        console.log(dogObj);
         let petCarouselItems = dogObj.images.map(function (img) {
-            let obj = { src: '../' + img, altText: dogObj.name, caption: '' };
+            let obj = { src: 'url(' + img + ')', altText: dogObj.name, caption: '' };
             return obj;
         })
 
         let ownerCarouselItems = ownerObj.images.map(function (img) {
-            let obj = { src: '../' + img, altText: ownerObj.name, caption: '' };
+            let obj = { src: 'url(' + img + ')', altText: ownerObj.name, caption: '' };
             return obj;
         })
 

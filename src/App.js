@@ -18,7 +18,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      potentialSwipes: [],
       loading: true,
+      userFetchLoading: true,
       pets:
       [
         {
@@ -80,12 +82,34 @@ class App extends Component {
           "age": "30-Something"
         }
       ],
-      owner: false,
-      currentPet: 0,
+      // owner: false,
+      currentViewedProfile: {},
+      pulsing: false,
     };
   }
 
   componentDidMount() {
+    var allUserRef = firebase.database().ref('users');
+    allUserRef.once('value')
+    .then((snapshot) => {
+      var allUsers = Object.keys(snapshot.val());
+      this.setState({potentialSwipes: allUsers});
+      if (this.state.potentialSwipes.length > 0) {
+        console.log(this.state.potentialSwipes[0]);
+        firebase.database().ref('users/' + this.state.potentialSwipes[0]).once('value')
+          .then((snapshot) => {
+            console.log(snapshot.val());
+            this.setState({currentViewedProfile: snapshot.val()});
+            this.setCurrentViewNode();
+
+          })
+      } else {
+        this.setState({pulsing:true});
+      }
+    });
+  
+   
+   
     this.unregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         this.setState({ user: firebaseUser });
@@ -97,10 +121,22 @@ class App extends Component {
     
   }
 
+  setCurrentViewNode(){
+    if (this.state.potentialSwipes.length > 0) {
+      var findUserRef =  firebase.database().ref('users/' + this.state.potentialSwipes[0]);
+      findUserRef.once('value')
+        .then((snapshot) => {
+          console.log(snapshot.val());
+          this.setState({currentViewedProfile: snapshot.val(), userFetchLoading:false});
+        })
+    } else {
+      this.setState({pulsing:true});
+    }
+  }
+
   componentWillUnmount() {
     this.unregisterFunction();
   }
-  // petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, userBio
 
   handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, userBio) {
     this.setState({ errorMessage: null });
@@ -157,15 +193,6 @@ class App extends Component {
     firebase.auth().signOut()
       .catch((err) => this.setState({ errorMessage: err.message }))
   }
-
-
-  // var ref = firebase.database().ref("users/ada");
-  // ref.once("value")
-  //   .then(function(snapshot) {
-  //     var key = snapshot.key; // "ada"
-  //     var childKey = snapshot.child("name/last").key; // "last"
-  //   });
-  // createConversation(user1, user2) {
     
   createConversation() {
     var countRef = firebase.database().ref('conversationCount');
@@ -203,33 +230,44 @@ class App extends Component {
 
   onLike(event) {
     setTimeout(() => {
-      this.setState({ liked: true, currentPet: this.state.currentPet + 1 });
+      var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
+      userYesSwipeRef.push(this.state.potentialSwipes[0]);
+      this.setState((prevState) => {potentialSwipes: prevState.potentialSwipes.slice(1)});
+    
+      /* need to change currentPet to potentialSwipe.pet at the 0 index*/
+      this.setCurrentViewNode();
+      // this.setState({ liked: true, currentPet: this.state.currentPet + 1});
     }, 700);
     console.log('liked');
   }
 
   onNope(event) {
     setTimeout(() => {
-      this.setState({ disliked: true, currentPet: this.state.currentPet + 1 });
+      var userNoSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/noSwipes');
+      userNoSwipeRef.push(this.state.potentialSwipes[0]);
+      this.setState((prevState) => {potentialSwipes: prevState.potentialSwipes.slice(1)});
+      this.setCurrentViewNode();
+      /* need to change currentPet to potentialSwipe.pet at the 0 index*/
+      // this.setState({ disliked: true, currentPet: this.state.currentPet + 1 });
     }, 700);
     console.log('nope');
   }
 
-  onSwitch(event) {
-    setTimeout(() => {
-      this.setState({ liked: false, disliked: false});
+  // onSwitch(event) {
+  //   setTimeout(() => {
+  //     this.setState({ liked: false, disliked: false});
     
-    if (this.state.owner) {
-      this.setState({owner: false});
-    }
-    else {
-      this.setState({owner: true});
-    }
-  }, 700);
-    // this.setState(this.state.owner ? { owner: false } : { owner: true });
-    console.log('swapped');
-    console.log(this.state.owner);
-    }
+  //   if (this.state.owner) {
+  //     this.setState({owner: false});
+  //   }
+  //   else {
+  //     this.setState({owner: true});
+  //   }
+  // }, 700);
+  //   // this.setState(this.state.owner ? { owner: false } : { owner: true });
+  //   console.log('swapped');
+  //   console.log(this.state.owner);
+  //   }
 
   cardReset(event) {
     setTimeout(() => {
@@ -261,8 +299,8 @@ class App extends Component {
 
       )
 
-    } else {
-      {this.createConversation()};
+    } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading){
+      {console.log(this.state.potentialSwipes)};
       content = (
         <div className='row'>
           <div className="border col-2">
@@ -270,18 +308,15 @@ class App extends Component {
           <div className="container col-10">
             <Switch>
               <Route path='/swipe' component={() =>
-                <Card dog={this.state.pets[this.state.currentPet] /*SHOULD GET PASSED A USER COMPONENT W/ OWNER INFO & PET INFO*/}
-                  owner={this.state.owners[0]}
-                  displayOwner={this.state.owner}
+                <Card dog={this.state.currentViewedProfile.pet}
+                  owner={this.state.currentViewedProfile.owner}
                   onLikeCallback={(event) => this.onLike(event)}
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
                   cardResetCallback={(event) => this.cardReset(event)}
-                  liked={this.state.liked}
-                  disliked={this.state.disliked}
-                  newCard={this.state.newCard} 
-                  noMorePets={true} /*SET TO TRUE TO DISPLAY PULSER*//>
-              } />
+                  noMorePets={this.state.pulsing}
+                   /> }
+               />
 
               <Route path='/conversations' component={() =>
                 <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
@@ -295,12 +330,12 @@ class App extends Component {
           </button>
         </div>
       )
-
-
-
+    } else {
+      content = (
+        <div className='row'>
+        </div>
+      )
     }
-
-
 
     return (
       <div>
