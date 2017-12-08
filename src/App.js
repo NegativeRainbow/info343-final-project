@@ -284,9 +284,8 @@ class App extends Component {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
-      var user2ID = this.state.potentialSwipes[0];
-      console.log(user2ID);
-      this.checkLikes(user2ID);
+      console.log(this.state.potentialSwipes[0]);
+      this.checkLikes();
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
       // this.setCurrentViewNode();
