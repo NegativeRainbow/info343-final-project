@@ -106,7 +106,7 @@ class App extends Component {
                 }
                 // this.setCurrentViewNode();
                 console.log(this.state.currentViewedProfile, this.state.potentialSwipes);
-                
+
 
               })
           } else {
@@ -121,7 +121,7 @@ class App extends Component {
       if (firebaseUser) {
         this.setState({ user: firebaseUser });
         this.filterFunc();
-        
+
       }
       else {
         this.setState({ user: null });
@@ -148,7 +148,7 @@ class App extends Component {
                 return allYesandNo.indexOf(userid) < 0;
               }
             });
-            this.setState({potentialSwipes: truncatedArray});
+            this.setState({ potentialSwipes: truncatedArray });
             this.setCurrentViewNode();
             // console.log(truncatedArray);
             // console.log(this.state.potentialSwipes);
@@ -248,26 +248,41 @@ class App extends Component {
         var userTwoRef = firebase.database().ref('users/' + user2ID + '/chats');
         userOneRef.once("value")
           .then((snapshot) => {
-            console.log(snapshot.val());
-            firebase.database().ref('users/' +user2ID).once('value')
+            firebase.database().ref('users/' + user2ID).once('value')
+              .then((snapshot2) => {
+                console.log(snapshot2.val());
+                return {
+                  name: snapshot2.val().pet.name,
+                  img: snapshot2.val().pet.imgs[0]
+                }
+              }).then((pushObj) =>{
+                var chatArray = snapshot.val();
+                chatArray.push(pushObj);
+                userOneRef.set(chatArray);
+              });
+            // var chatArray = snapshot.val();
+            // // var pushObj = {
+            // //   chatNum: val,
+            // //   matchPerson: 
+            // // }
+            // chatArray.push(val);
+            // userOneRef.set(chatArray);
+          });
+        userTwoRef.once("value")
+        .then((snapshot) => {
+          firebase.database().ref('users/' + this.state.user.uid).once('value')
             .then((snapshot2) => {
               console.log(snapshot2.val());
-            })
-            var chatArray = snapshot.val();
-            // var pushObj = {
-            //   chatNum: val,
-            //   matchPerson: 
-            // }
-            chatArray.push(val);
-            userOneRef.set(chatArray);
-          })
-        userTwoRef.once("value")
-          .then((snapshot) => {
-            console.log(snapshot.val());
-            var chatArray = snapshot.val();
-            chatArray.push(val);
-            userTwoRef.set(chatArray);
-          })
+              return {
+                name: snapshot2.val().pet.name,
+                img: snapshot2.val().pet.imgs[0]
+              }
+            }).then((pushObj) =>{
+              var chatArray = snapshot.val();
+              chatArray.push(pushObj);
+              userTwoRef.set(chatArray);
+            });
+        });
         var createdConvo = firebase.database().ref('allConversations/' + val);
         createdConvo.push('[Conversation Start Placeholder]');
 
@@ -297,9 +312,9 @@ class App extends Component {
       this.setState({ potentialSwipes: newRef });
       // this.setCurrentViewNode();
       this.filterFunc();
-      
+
     }, 700);
-    
+
     console.log('liked');
   }
 
@@ -382,7 +397,7 @@ class App extends Component {
           </button>
         </div>
       )
-    } else { 
+    } else {
       content = (
         <div className='row'>
         </div>
