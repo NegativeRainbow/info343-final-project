@@ -234,7 +234,7 @@ class App extends Component {
       .catch((err) => this.setState({ errorMessage: err.message }))
   }
 
-  createConversation() {
+  createConversation(user2ID) {
     var countRef = firebase.database().ref('conversationCount');
     countRef.once("value")
       .then(function (snapshot) {
@@ -245,9 +245,8 @@ class App extends Component {
       .then((val) => {
         countRef.set(val);
         var userOneRef = firebase.database().ref('users/' + this.state.user.uid + '/chats');
-        var userTwoRef = firebase.database().ref('users/' + this.state.potentialSwipes[0] + '/chats');
-        console.log(this.state.user.uid);
-        console.log(this.state.potentialSwipes[0]);
+        var userTwoRef = firebase.database().ref('users/' + user2ID + '/chats');
+        console.log(user2ID);
         userOneRef.once("value")
           .then((snapshot) => {
             console.log(snapshot.val());
@@ -269,12 +268,14 @@ class App extends Component {
 
   }
 
-  checkLikes() {
-    firebase.database().ref('users/' + this.state.potentialSwipes[0] +'/yesSwipes').once('value')
+  checkLikes(user2ID) {
+    console.log(this.state.potentialSwipes);
+    firebase.database().ref('users/' + user2ID +'/yesSwipes').once('value')
     .then((snapshot) =>{
       console.log(snapshot.val());
       if (Object.values(snapshot.val()).includes(this.state.user.uid)) {
-        this.createConversation();
+        console.log(user2ID);
+        this.createConversation(user2ID);
       }
     })
   }
@@ -283,8 +284,9 @@ class App extends Component {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
-      console.log(this.potentialSwipes[0]);
-      this.checkLikes();
+      var user2ID = this.state.potentialSwipes[0];
+      console.log(user2ID);
+      this.checkLikes(user2ID);
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
       // this.setCurrentViewNode();
