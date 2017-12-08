@@ -6,7 +6,7 @@ import { Chatroom } from './chatroom.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
 import DogMap from './DogMap';
@@ -391,6 +391,16 @@ class App extends Component {
 
             </Switch>
           </div>
+          <span aria-label="Map Button" className="btn btn-secondary">
+            <Link to={'/map'}>
+            Go to Map
+            </Link>
+          </span>
+          <span aria-label="Conversations Button" className="btn btn-secondary">
+            <Link to='/conversations'>
+            Go to Conversations
+            </Link>
+          </span>
           <button aria-label="Log Out Button" className="btn btn-warning"
             onClick={() => this.handleSignOut()}>
             Log Out {this.state.user.displayName}
