@@ -10,6 +10,19 @@ import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
 import DogMap from './DogMap';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  matchImg: {
+    borderRadius: '100%',
+    width: 56,
+    height: 56,
+    margin: 12
+  },
+  matchCard: {
+    width: '100%'
+  }
+})
 
 
 class App extends Component {
@@ -365,8 +378,14 @@ class App extends Component {
     } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading) {
       content = (
         <div className='row'>
-          <div className="border col-2">
+          <div className="border col-2 px-0">
+            <div className="container">
+              <h2>Matches {'<3'}</h2>
+              <MatchCard name="butt" image="img/joel.jpg" />
+              <MatchCard name="butt" image="img/joel.jpg" />
+            </div>
           </div>
+
           <div className="container col-10">
             <Switch>
               <Route path='/swipe' component={() =>
@@ -431,9 +450,13 @@ class App extends Component {
 class MatchCard extends Component {
   render() {
     return (
-      <div>
-          <div>
-            </div>
+      <div className={css(styles.matchCard) + " card"}>
+      <div className="container">
+          <div className="row">
+              <img className={css(styles.matchImg) + " col card-img"} src={this.props.image}></img>
+              <p className={"card-body"}>{this.props.name}</p>
+          </div>
+          </div>
       </div>
     );
   }
