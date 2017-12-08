@@ -34,6 +34,7 @@ class App extends Component {
       potentialSwipes: [],
       loading: true,
       userFetchLoading: true,
+      chatObjs: [],
       pets:
       [
         {
@@ -134,6 +135,7 @@ class App extends Component {
       if (firebaseUser) {
         this.setState({ user: firebaseUser });
         this.filterFunc();
+        this.matchCardMap();
 
       }
       else {
@@ -343,7 +345,23 @@ class App extends Component {
     console.log('nope');
   }
 
+  matchCardMap(){
+    firebase.database().ref('users/' + this.state.user.uid +'/chats').once('value')
+    .then((snapshot) => {
 
+      var toMap = snapshot.val().slice(1);
+      // toMap = toMap.map((chat) => {
+      //   console.log(chat.img, chat.name);
+      //   return <MatchCard image={chat.img} name={chat.name} />
+      this.setState({chatObjs:toMap});
+      // });
+      // console.log(toMap);
+      // if (this.state.chatLoading === true){
+      //   this.setState({chatLoading: false});
+      // }
+      // return toMap;
+    });
+  }
 
   cardReset(event) {
     setTimeout(() => {
@@ -375,14 +393,19 @@ class App extends Component {
 
       )
 
-    } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading) {
+    } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading ) {
       content = (
         <div className='row'>
           <div className="border col-2 px-0">
             <div className="container">
               <h2>Matches {'<3'}</h2>
-              <MatchCard name="butt" image="img/joel.jpg" />
-              <MatchCard name="butt" image="img/joel.jpg" />
+              {this.state.chatObjs.map((chat) => {
+                return <MatchCard name={chat.name} image={chat.img} />
+              })
+              }
+              {/* {this.matchCardMap()} */}
+              {/* <MatchCard name="butt" image="img/joel.jpg" />
+              <MatchCard name="butt" image="img/joel.jpg" /> */}
             </div>
           </div>
 
