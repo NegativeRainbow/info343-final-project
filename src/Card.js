@@ -113,16 +113,17 @@ export default class Card extends Component {
 
     render() {
         // For ease of use
-        let dogObj = this.props.dog;
-        let ownerObj = this.props.owner;
+
+        let dogObj = this.props.user.pet;
+        let ownerObj = this.props.user.owner;
         console.log(dogObj);
-        let petCarouselItems = dogObj.images.map(function (img) {
-            let obj = { src: 'url(' + img + ')', altText: dogObj.name, caption: '' };
+        let petCarouselItems = dogObj.imgs.map(function (img) {
+            let obj = { src: img, altText: dogObj.name, caption: '' };
             return obj;
         })
 
-        let ownerCarouselItems = ownerObj.images.map(function (img) {
-            let obj = { src: 'url(' + img + ')', altText: ownerObj.name, caption: '' };
+        let ownerCarouselItems = ownerObj.imgs.map(function (img) {
+            let obj = { src: img, altText: ownerObj.name, caption: '' };
             return obj;
         })
 
@@ -144,7 +145,7 @@ export default class Card extends Component {
                                     </div>
                                     <div className="card-body">
                                         <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
-                                        <p className="card-text breed">{dogObj.sex + ', ' + dogObj.breed}</p>
+                                        <p className="card-text breed">{dogObj.gender + ', ' + dogObj.breed}</p>
                                         <p className='card-text bio'>{dogObj.bio}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
