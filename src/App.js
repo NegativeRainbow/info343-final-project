@@ -9,6 +9,7 @@ import 'firebase/auth';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
+import DogMap from './DogMap';
 
 
 class App extends Component {
@@ -288,7 +289,6 @@ class App extends Component {
             <Route exact path='/' component={() =>
               <SignInForm signInCallback={(e, p) => this.handleSignIn(e, p)} />
             } />
-            <Redirect exact to='/' />
           </Switch>
         </div>
 
@@ -315,7 +315,11 @@ class App extends Component {
               <Route path='/conversations' component={() =>
                 <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
               } />
-              <Redirect to='/swipe' />
+
+              <Route path='/map' component={() =>
+                <DogMap />
+              } />
+
             </Switch>
           </div>
           <button aria-label="Log Out Button" className="btn btn-warning"
