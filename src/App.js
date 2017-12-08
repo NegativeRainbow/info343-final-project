@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Card from './Card';
@@ -7,7 +6,7 @@ import { Chatroom } from './chatroom.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import { Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
 
@@ -244,7 +243,6 @@ class App extends Component {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
       this.setState((prevState) => {potentialSwipes: prevState.potentialSwipes.slice(1)});
-    
       /* need to change currentPet to potentialSwipe.pet at the 0 index*/
       this.setCurrentViewNode();
       // this.setState({ liked: true, currentPet: this.state.currentPet + 1});

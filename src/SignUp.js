@@ -1,12 +1,11 @@
 import React, { Component } from 'react'; //import React Component
-import { Button, FormFeedback, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+import { Button, FormFeedback} from 'reactstrap';
 import { FormGroup } from 'reactstrap';
 import { Label } from 'reactstrap';
 import { Input } from 'reactstrap';
 import { Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './SignUp.css'; //load module CSS
-import noUserPic from './img/no-user-pic.png'; //placeholder image (as a data Uri)
 
 
 class SignUpForm extends Component {
