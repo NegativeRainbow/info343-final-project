@@ -146,7 +146,7 @@ export default class Card extends Component {
                                     <div className="card-body">
                                         <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
                                         <p className="card-text breed">{dogObj.gender + ', ' + dogObj.breed}</p>
-                                        <p className='card-text bio'>{dogObj.bio}</p>
+                                        <p className='card-text bio'>{this.props.user.bio}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
                                                 <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
@@ -183,8 +183,8 @@ export default class Card extends Component {
                                     </div>
                                     <div className="card-body">
                                         <h3 className="card-title name">{ownerObj.name + ', ' + ownerObj.age}</h3>
-                                        <p className="card-text breed">{ownerObj.sex + ', ' + ownerObj.occupation}</p>
-                                        <p className='card-text bio'>{ownerObj.bio}</p>
+                                        <p className="card-text breed">{ownerObj.occupation}</p>
+                                        <p className='card-text bio'>{this.props.user.bio}</p>
                                         <div className='row'>
                                             <div className='col justify-content-center'>
                                                 <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
