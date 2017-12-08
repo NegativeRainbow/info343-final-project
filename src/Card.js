@@ -54,12 +54,10 @@ export default class Card extends Component {
         this.state = {
             morePets: this.props.noMorePets,
         }
-        console.log(this.props.user);
     }
 
     componentDidMount() {
         this.setState({ loading: false }); // PLACEHOLDER FOR NOW
-        console.log("more pets: " + this.props.morePets);
     }
 
     // Performs Like Animation on Pet Card
@@ -103,12 +101,10 @@ export default class Card extends Component {
         if (isPet) {
             let card = document.querySelector(".card-flipper");
             card.className = 'card-flipper flipper';
-            console.log('flipped');
         }
         else {
             let card = document.querySelector(".card-flipper");
             card.className = 'card-flipper flipBack';
-            console.log('flipped back');
         }
     }
 
@@ -116,7 +112,6 @@ export default class Card extends Component {
         // For ease of use
         let dogObj = this.props.user.pet;
         let ownerObj = this.props.user.owner;
-        console.log(dogObj);
         let petCarouselItems = dogObj.imgs.map(function (img) {
             let obj = { src: img , altText: dogObj.name, caption: '' };
             return obj;
