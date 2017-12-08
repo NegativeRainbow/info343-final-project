@@ -246,11 +246,18 @@ class App extends Component {
         countRef.set(val);
         var userOneRef = firebase.database().ref('users/' + this.state.user.uid + '/chats');
         var userTwoRef = firebase.database().ref('users/' + user2ID + '/chats');
-        console.log(user2ID);
         userOneRef.once("value")
           .then((snapshot) => {
             console.log(snapshot.val());
+            firebase.database().ref('users/' +user2ID).once('value')
+            .then((snapshot2) => {
+              console.log(snapshot2.val());
+            })
             var chatArray = snapshot.val();
+            // var pushObj = {
+            //   chatNum: val,
+            //   matchPerson: 
+            // }
             chatArray.push(val);
             userOneRef.set(chatArray);
           })
