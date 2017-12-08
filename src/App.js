@@ -155,14 +155,14 @@ class App extends Component {
     return {
       pet: {
         name: petName,
-        imgs: petImgs,
+        imgs: [petImgs],
         gender: petGender,
         age: petAge,
         breed: petBreed
       },
       owner: {
         name: ownerName,
-        imgs: ownerImgs,
+        imgs: [ownerImgs],
         age: ownerAge
       },
       bio: userBio
@@ -307,9 +307,8 @@ class App extends Component {
           </div>
           <div className="container col-10">
             <Switch>
-              <Route path='/swipe' component={() =>
-                <Card dog={this.state.currentViewedProfile.pet}
-                  owner={this.state.currentViewedProfile.owner}
+              <Route path='/swipe' component={() => 
+                <Card user={this.state.currentViewedProfile}
                   onLikeCallback={(event) => this.onLike(event)}
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
