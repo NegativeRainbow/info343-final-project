@@ -384,10 +384,17 @@ class App extends Component {
     setTimeout(() => {
       this.setState({ liked: false, disliked: false });
     }, 1000);
-
     console.log('reset');
   }
 
+  pulseCallback() {
+    firebase.database().ref('users/').value('once')
+    .then((snapshot) => {
+      var allUsers = Object.keys(snapshot.val());
+      this.setState({potentialSwipes: allUsers});
+      this.filterFunc();
+    })
+  }
 
   render() {
     let content = null;
@@ -430,7 +437,7 @@ class App extends Component {
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
                   cardResetCallback={(event) => this.cardReset(event)}
-                  pulseCallback={() => this.filterFunc()}
+                  pulseCallback={() => this.pulseCallback()}
                   noMorePets={this.state.pulsing}
                 />}
               />
