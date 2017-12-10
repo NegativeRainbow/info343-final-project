@@ -477,7 +477,7 @@ class App extends Component {
         <main className="container">
           {content}
         </main>
-        <footer>
+        <footer className="container">
           <p>By Gabe Bizar, Robin Yang, and Danish Bashar</p>
         </footer>
       </div>
