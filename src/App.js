@@ -155,6 +155,7 @@ class App extends Component {
   }
 
   filterFunc() {
+    console.log('filter');
     var yesSwipesRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes').once('value')
       .then((snapshot) => {
         return Object.values(snapshot.val());
@@ -429,6 +430,7 @@ class App extends Component {
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
                   cardResetCallback={(event) => this.cardReset(event)}
+                  pulseCallback={() => this.filterFunc()}
                   noMorePets={this.state.pulsing}
                 />}
               />
@@ -460,7 +462,7 @@ class App extends Component {
     } else {
       content = (
         <div>
-          <p>Loading Matches</p>
+          <h1>Loading Matches</h1>
         </div>
       )
     }
