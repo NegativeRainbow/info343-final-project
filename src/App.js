@@ -9,7 +9,6 @@ import 'firebase/auth';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import SignUpForm from './SignUp';
 import SignInForm from './SignIn';
-import DogMap from './DogMap';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -424,7 +423,7 @@ class App extends Component {
             <div className="container">
               <h2>Matches {'<3'}</h2>
               {this.state.chatObjs.map((chat) => {
-                return <Link to={'/conversations/' + chat.number} key={chat}><MatchCard name={chat.name} image={chat.img}/></Link>
+                return <Link to={'/conversations/' + chat.number} key={chat.name}><MatchCard name={chat.name} image={chat.img}/></Link>
               })}
             </div>
           </div>
@@ -459,19 +458,10 @@ class App extends Component {
                 } />
               })}
 
-              <Route path='/map' component={() =>
-                <DogMap />
-              } />
-
               <Redirect to='/swipe' />
 
             </Switch>
           </div>
-          <Link to="/map">
-            <button aria-label="Map Button" className="btn btn-primary">
-              Go to Map
-            </button>
-          </Link>
           <button aria-label="Log Out Button" className="btn btn-warning"
             onClick={() => this.handleSignOut()}>
             Log Out
