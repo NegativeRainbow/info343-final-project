@@ -476,7 +476,11 @@ class App extends Component {
 
     return (
       <div>
-        <header>
+        <header className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1>Woofr</h1>
+            <p>A tinder-like app for dog lovers in Seattle</p>
+          </div>
         </header>
         <main className="container">
           {content}
