@@ -435,9 +435,16 @@ class App extends Component {
                 />}
               />
 
-              {/* <Route exact path='/conversations/:chatNumber' component={() =>
+              <Route exact path='/conversations/:chatNumber' component={() =>
+                <div>
                 <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
-              } /> */}
+                <Link to={'/swipe'}>
+                  <button aria-label="Return to Swipes Button" className="btn btn-warning">
+                    Return to Swipes
+                  </button>
+                </Link>
+                </div>
+              } />
 
               {this.state.chatObjs.map((chat) => {
                 return <Route key={chat} path={'/conversations/' + chat.number} component={() =>
@@ -471,7 +478,7 @@ class App extends Component {
       <div>
         <header>
         </header>
-        <main>
+        <main className="container">
           {content}
         </main>
 
