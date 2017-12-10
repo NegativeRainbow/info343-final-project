@@ -187,7 +187,7 @@ class App extends Component {
           this.setState({ currentViewedProfile: snapshot.val(), userFetchLoading: false });
         })
     } else {
-      this.setState({ pulsing: true });
+      this.setState({ pulsing: true, userFetchLoading: false });
     }
   }
 
@@ -409,7 +409,7 @@ class App extends Component {
 
       )
 
-    } else if (this.state.potentialSwipes.length > 0 && !this.state.userFetchLoading ) {
+    } else if ( !this.state.userFetchLoading ) {
       content = (
         <div className='row'>
           <div className="border col-2 px-0">
@@ -459,7 +459,8 @@ class App extends Component {
       )
     } else {
       content = (
-        <div className='row'>
+        <div>
+          <p>Loading Matches</p>
         </div>
       )
     }

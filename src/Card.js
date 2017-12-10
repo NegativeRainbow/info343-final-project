@@ -52,7 +52,7 @@ export default class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            morePets: this.props.noMorePets,
+            morePets: !this.props.noMorePets,
         }
     }
 
@@ -109,103 +109,116 @@ export default class Card extends Component {
     }
 
     render() {
-        // For ease of use
-        let dogObj = this.props.user.pet;
-        let ownerObj = this.props.user.owner;
-        let petCarouselItems = dogObj.imgs.map(function (img) {
-            let obj = { src: img , altText: dogObj.name, caption: '' };
-            return obj;
-        })
 
-        let ownerCarouselItems = ownerObj.imgs.map(function (img) {
-            let obj = { src: img, altText: ownerObj.name, caption: '' };
-            return obj;
-        })
+        let content = null;
 
-        return (
-            <div className="d-flex justify-content-center">
-                {this.state.morePets ? <Pulser /> :
-                    <div className="card-flipper">
-                        <div className="flip">
-                            <div className='petSide'>
-                                <div className={"card profileCardPet"}>
-                                    <div className={css(styles.carouselWrap)}>
-                                        <UncontrolledCarousel
-                                            items={petCarouselItems}
-                                            indicators={true}
-                                            controls={true}
-                                            autoPlay={false}>
-                                            <CarouselItem cssModule={{ width: '100%' }} />
-                                        </UncontrolledCarousel>
-                                    </div>
-                                    <div className="card-body">
-                                        <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
-                                        <p className="card-text breed">{dogObj.gender + ', ' + dogObj.breed}</p>
-                                        <p className='card-text bio'>{this.props.user.bio}</p>
-                                        <div className='row'>
-                                            <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
-                                                    { this.props.onNopeCallback(event); 
-                                                      this.updateClassOnNopePet(event); 
-                                                      this.props.cardResetCallback(event); }}>
-                                                </button>
-                                            </div>
-                                            <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => 
-                                                    { this.updateClassOnSwitch(event, true) }}></button>
-                                            </div>
-                                            <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike)} onClick={(event) => 
-                                                    { this.props.onLikeCallback(event); 
-                                                      this.updateClassOnLikePet(event); 
-                                                      this.props.cardResetCallback(event); }}>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        if(this.state.morePets){
+            // For ease of use
+            let dogObj = this.props.user.pet;
+            let ownerObj = this.props.user.owner;
+            let petCarouselItems = dogObj.imgs.map(function (img) {
+                let obj = { src: img , altText: dogObj.name, caption: '' };
+                return obj;
+            })
+
+            let ownerCarouselItems = ownerObj.imgs.map(function (img) {
+                let obj = { src: img, altText: ownerObj.name, caption: '' };
+                return obj;
+            })
+
+            content = (
+                <div className="card-flipper">
+                <div className="flip">
+                    <div className='petSide'>
+                        <div className={"card profileCardPet"}>
+                            <div className={css(styles.carouselWrap)}>
+                                <UncontrolledCarousel
+                                    items={petCarouselItems}
+                                    indicators={true}
+                                    controls={true}
+                                    autoPlay={false}>
+                                    <CarouselItem cssModule={{ width: '100%' }} />
+                                </UncontrolledCarousel>
                             </div>
-                            <div className='ownerSide'>
-                                <div className={"card profileCardOwner"}>
-                                    <div className={css(styles.carouselWrap)}>
-                                        <UncontrolledCarousel
-                                            items={ownerCarouselItems}
-                                            indicators={true}
-                                            controls={true}
-                                            autoPlay={false}>
-                                            <CarouselItem cssModule={{ width: '100%' }} />
-                                        </UncontrolledCarousel>
+                            <div className="card-body">
+                                <h3 className="card-title name">{dogObj.name + ', ' + dogObj.age}</h3>
+                                <p className="card-text breed">{dogObj.gender + ', ' + dogObj.breed}</p>
+                                <p className='card-text bio'>{this.props.user.bio}</p>
+                                <div className='row'>
+                                    <div className='col justify-content-center'>
+                                        <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
+                                            { this.props.onNopeCallback(event); 
+                                              this.updateClassOnNopePet(event); 
+                                              this.props.cardResetCallback(event); }}>
+                                        </button>
                                     </div>
-                                    <div className="card-body">
-                                        <h3 className="card-title name">{ownerObj.name + ', ' + ownerObj.age}</h3>
-                                        <p className="card-text breed">{ownerObj.occupation}</p>
-
-                                        <p className='card-text bio'>{this.props.user.bio}</p>
-                                        <div className='row'>
-                                            <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
-                                                    { this.props.onNopeCallback(event); 
-                                                      this.updateClassOnNopeOwner(event); 
-                                                      this.props.cardResetCallback(event); }}>
-                                                </button>
-                                            </div>
-                                            <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => 
-                                                    { this.updateClassOnSwitch(event, false) }}></button>
-                                            </div>
-                                            <div className='col justify-content-center'>
-                                                <button className={css(styles.btnLike)} onClick={(event) => 
-                                                    { this.props.onLikeCallback(event); 
-                                                      this.updateClassOnLikeOwner(event); 
-                                                      this.props.cardResetCallback(event); }}>
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <div className='col justify-content-center'>
+                                        <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => 
+                                            { this.updateClassOnSwitch(event, true) }}></button>
+                                    </div>
+                                    <div className='col justify-content-center'>
+                                        <button className={css(styles.btnLike)} onClick={(event) => 
+                                            { this.props.onLikeCallback(event); 
+                                              this.updateClassOnLikePet(event); 
+                                              this.props.cardResetCallback(event); }}>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>}
+                    </div>
+                    <div className='ownerSide'>
+                        <div className={"card profileCardOwner"}>
+                            <div className={css(styles.carouselWrap)}>
+                                <UncontrolledCarousel
+                                    items={ownerCarouselItems}
+                                    indicators={true}
+                                    controls={true}
+                                    autoPlay={false}>
+                                    <CarouselItem cssModule={{ width: '100%' }} />
+                                </UncontrolledCarousel>
+                            </div>
+                            <div className="card-body">
+                                <h3 className="card-title name">{ownerObj.name + ', ' + ownerObj.age}</h3>
+                                <p className="card-text breed">{ownerObj.occupation}</p>
+
+                                <p className='card-text bio'>{this.props.user.bio}</p>
+                                <div className='row'>
+                                    <div className='col justify-content-center'>
+                                        <button className={css(styles.btnLike, styles.btnNope)} onClick={(event) => 
+                                            { this.props.onNopeCallback(event); 
+                                              this.updateClassOnNopeOwner(event); 
+                                              this.props.cardResetCallback(event); }}>
+                                        </button>
+                                    </div>
+                                    <div className='col justify-content-center'>
+                                        <button className={css(styles.btnLike, styles.btnOwner)} onClick={(event) => 
+                                            { this.updateClassOnSwitch(event, false) }}></button>
+                                    </div>
+                                    <div className='col justify-content-center'>
+                                        <button className={css(styles.btnLike)} onClick={(event) => 
+                                            { this.props.onLikeCallback(event); 
+                                              this.updateClassOnLikeOwner(event); 
+                                              this.props.cardResetCallback(event); }}>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            );
+
+        } else {
+            content = (
+                <Pulser />
+            );
+        }
+
+        return (
+            <div className="d-flex justify-content-center">
+                {content}
             </div>
         );
     }
