@@ -388,7 +388,7 @@ class App extends Component {
   }
 
   pulseCallback() {
-    firebase.database().ref('users/').value('once')
+    firebase.database().ref('users/').once('value')
     .then((snapshot) => {
       var allUsers = Object.keys(snapshot.val());
       this.setState({potentialSwipes: allUsers});
