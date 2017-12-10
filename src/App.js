@@ -460,9 +460,14 @@ class App extends Component {
 
             </Switch>
           </div>
+          <Link to="/map">
+            <button aria-label="Map Button" className="btn btn-primary">
+              Go to Map
+            </button>
+          </Link>
           <button aria-label="Log Out Button" className="btn btn-warning"
             onClick={() => this.handleSignOut()}>
-            Log Out {this.state.user.displayName}
+            Log Out
           </button>
         </div>
       )
