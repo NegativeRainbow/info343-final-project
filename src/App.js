@@ -386,15 +386,6 @@ class App extends Component {
     console.log('reset');
   }
 
-  pulseCallback() {
-    firebase.database().ref('users/').once('value')
-    .then((snapshot) => {
-      var allUsers = Object.keys(snapshot.val());
-      this.setState({potentialSwipes: allUsers});
-      this.filterFunc();
-    })
-  }
-
   render() {
     let content = null;
     if (!this.state.user) {
@@ -436,7 +427,6 @@ class App extends Component {
                   onNopeCallback={(event) => this.onNope(event)}
                   onSwitchCallback={(event) => this.onSwitch(event)}
                   cardResetCallback={(event) => this.cardReset(event)}
-                  pulseCallback={() => this.pulseCallback()}
                   noMorePets={this.state.pulsing}
                 />}
               />

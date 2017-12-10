@@ -212,7 +212,7 @@ export default class Card extends Component {
 
         } else {
             content = (
-                <Pulser clickCallback={() => this.props.pulseCallback()} />
+                <Pulser />
             );
         }
 
@@ -227,7 +227,7 @@ export default class Card extends Component {
 class Pulser extends Component {
     render() {
         return (
-        <div onClick={() => this.props.clickCallback()} className="test-container">
+        <div onClick={() => {window.location.reload()}} className="test-container">
             <div className="search-anim">
             </div>
             <div className="search-anim2">
