@@ -14,7 +14,6 @@ export class Chatroom extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.user);
         this.props.chatroom.on('value', (snapshot) => {
             let conversationArray = Object.keys(snapshot.val()).map((message) => {
                 return {
@@ -109,6 +108,7 @@ class MessageInput extends Component {
     }
 
     render() {
+
         let user = this.props.user;
         return (
             <div className="container px-0">

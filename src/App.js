@@ -34,68 +34,6 @@ class App extends Component {
       loading: true,
       userFetchLoading: true,
       chatObjs: [],
-      pets:
-      [
-        {
-          "name": "Fido",
-          "sex": "Male",
-          "breed": "Mix",
-          "images": ["img/069b8257-f9db-4034-908f-12b8cea76693.jpg",
-            "img/00654c82-4df9-418f-b5f1-c6d094457f1f.jpg",
-            "img/7683254c-debd-4d9c-b0ef-7861d7ad0cd5.jpg"
-          ],
-          "bio": "1 gud boi. No Hookups",
-          "age": 3
-        },
-        {
-          "name": "Spot",
-          "sex": "Female",
-          "breed": "Terrier",
-          "images": ["img/78e41dd3-4216-47f1-9598-ea8220de354b.jpg",
-            "img/867df82c-1b72-495e-a349-7c067c700132.jpg",
-            "img/f4456b54-3c2c-4024-adc2-04fc19c5561b.jpg"
-          ],
-          "bio": "I may be a Terrier but I sure ain't Terrierfying",
-          "age": 7
-        },
-        {
-          "name": "Cody",
-          "sex": "Male",
-          "breed": "Toy Poodle",
-          "images":
-          ["img/cody3.jpg",
-            "img/cody2.jpg",
-            "img/cody4.jpg"],
-          "bio": "I am dumb and cute",
-          "age": 5
-        },
-        {
-          "name": "Sasha",
-          "sex": "Female",
-          "breed": "Black Lab Mix",
-          "images":
-          ["img/snoozle1.png",
-            "img/snoozle2.png",
-            "img/snoozle3.png"
-          ],
-          "bio": "Bring me food, rub my belly, and I'm yours.",
-          "age": 11
-        }
-      ],
-      owners:
-      [
-        {
-          "name": "Joel",
-          "sex": "Male",
-          "occupation": "Professor",
-          "images":
-          ["img/joel.jpg"
-          ],
-          "bio": "Thumbs Up!",
-          "age": "30-Something"
-        }
-      ],
-      // owner: false,
       currentViewedProfile: {},
       currentUser: {},
       pulsing: false,
@@ -114,14 +52,11 @@ class App extends Component {
               .then((snapshot) => {
                 if (this.state.user) {
                   this.filterFunc();
+                  this.matchCardMap();
                 } else {
                   this.setState({ currentViewedProfile: snapshot.val() });
                   this.setCurrentViewNode();
                 }
-                // this.setCurrentViewNode();
-                console.log(this.state.currentViewedProfile, this.state.potentialSwipes);
-
-
               })
           } else {
             this.setState({ pulsing: true });
@@ -154,13 +89,12 @@ class App extends Component {
   }
 
   filterFunc() {
-    console.log('filter');
-    var yesSwipesRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes').once('value')
+    firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes').once('value')
       .then((snapshot) => {
         return Object.values(snapshot.val());
       })
       .then((val) => {
-        var noSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/noSwipes').once('value')
+        firebase.database().ref('users/' + this.state.user.uid + '/noSwipes').once('value')
           .then((snapshot) => {
             return Object.values(snapshot.val());
           })
@@ -168,14 +102,13 @@ class App extends Component {
             var allYesandNo = value.concat(val);
             var truncatedArray = this.state.potentialSwipes;
             truncatedArray = truncatedArray.filter((userid) => {
-              if (this.state.user.uid !== userid) {
-                return allYesandNo.indexOf(userid) < 0;
-              }
+              // if (this.state.user.uid !== userid) {
+                return this.state.user.uid !== userid && allYesandNo.indexOf(userid) < 0;
+              // }
             });
             this.setState({ potentialSwipes: truncatedArray });
             this.setCurrentViewNode();
-            // console.log(truncatedArray);
-            // console.log(this.state.potentialSwipes);
+    
           })
       });
   }
@@ -193,6 +126,7 @@ class App extends Component {
 
   componentWillUnmount() {
     this.unregisterFunction();
+    this.chatRef.off();
   }
 
   handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio) {
@@ -226,14 +160,6 @@ class App extends Component {
       "bio": userBio
     }
   }
-
-  // function writeUserData(userId, name, email, imageUrl) {
-  //   firebase.database().ref('users/' + userId).set({
-  //     username: name,
-  //     email: email,
-  //     profile_picture : imageUrl
-  //   });
-  // }
 
   pushUserNode(inputUser, bio, petData, ownerData) {
     firebase.database().ref('users/' + inputUser).set({
@@ -285,13 +211,6 @@ class App extends Component {
                 chatArray.push(pushObj);
                 userOneRef.set(chatArray);
               });
-            // var chatArray = snapshot.val();
-            // // var pushObj = {
-            // //   chatNum: val,
-            // //   matchPerson: 
-            // // }
-            // chatArray.push(val);
-            // userOneRef.set(chatArray);
           });
         userTwoRef.once("value")
         .then((snapshot) => {
@@ -317,12 +236,9 @@ class App extends Component {
   }
 
   checkLikes(user2ID) {
-    console.log(this.state.potentialSwipes[0]);
     firebase.database().ref('users/' + user2ID +'/yesSwipes').once('value')
     .then((snapshot) =>{
-      console.log(snapshot.val());
       if (Object.values(snapshot.val()).includes(this.state.user.uid)) {
-        console.log(user2ID);
         this.createConversation(user2ID);
       }
     })
@@ -332,17 +248,12 @@ class App extends Component {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
       userYesSwipeRef.push(this.state.potentialSwipes[0]);
-      console.log(this.state.potentialSwipes[0]);
       this.checkLikes(this.state.potentialSwipes[0]);
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
-      // this.setCurrentViewNode();
       this.filterFunc();
-      this.matchCardMap();
-
     }, 700);
 
-    console.log('liked');
   }
 
   onNope(event) {
@@ -351,39 +262,24 @@ class App extends Component {
       userNoSwipeRef.push(this.state.potentialSwipes[0]);
       var newRef = this.state.potentialSwipes.slice(1);
       this.setState({ potentialSwipes: newRef });
-      // this.setCurrentViewNode();
       this.filterFunc();
     }, 1000);
-    console.log('nope');
   }
 
-  onMatch(event) {
-
-  }
 
   matchCardMap(){
-    firebase.database().ref('users/' + this.state.user.uid +'/chats').once('value')
-    .then((snapshot) => {
-
+ 
+    this.chatRef = firebase.database().ref('users/' + this.state.user.uid +'/chats');
+    this.chatRef.on('value', (snapshot) => {
       var toMap = snapshot.val().slice(1);
-      // toMap = toMap.map((chat) => {
-      //   console.log(chat.img, chat.name);
-      //   return <MatchCard image={chat.img} name={chat.name} />
-      this.setState({chatObjs:toMap});
-      // });
-      // console.log(toMap);
-      // if (this.state.chatLoading === true){
-      //   this.setState({chatLoading: false});
-      // }
-      // return toMap;
-    });
+      this.setState({chatObjs: toMap});
+    })
   }
 
   cardReset(event) {
     setTimeout(() => {
       this.setState({ liked: false, disliked: false });
     }, 1000);
-    console.log('reset');
   }
 
   render() {
@@ -431,20 +327,16 @@ class App extends Component {
                 />}
               />
 
-              <Route exact path='/conversations/:chatNumber' component={() =>
-                <div>
-                <Chatroom user={this.state.pets[0]} chatroom={firebase.database().ref('allConversations/' + this.state.conversationCount)} />
-                <Link to={'/swipe'}>
+              {this.state.chatObjs.map((chat) => {
+                return <Route key={chat} path={'/conversations/' + chat.number} component={() =>
+                  <div>
+                  <Chatroom chatroom={firebase.database().ref('allConversations/' + chat.number)} user={this.state.currentUser.pet} />
+                  <Link to={'/swipe'}>
                   <button aria-label="Return to Swipes Button" className="btn btn-warning">
                     Return to Swipes
                   </button>
-                </Link>
-                </div>
-              } />
-
-              {this.state.chatObjs.map((chat) => {
-                return <Route key={chat} path={'/conversations/' + chat.number} component={() =>
-                  <Chatroom chatroom={firebase.database().ref('allConversations/' + chat.number)} user={this.state.currentUser.pet} />
+                  </Link>
+                  </div>
                 } />
               })}
 
@@ -491,7 +383,7 @@ class MatchCard extends Component {
       <div className={css(styles.matchCard) + " card"}>
       <div className="container">
           <div className="row">
-              <img className={css(styles.matchImg) + " col card-img"} src={this.props.image}></img>
+              <img className={css(styles.matchImg) + " col card-img"} src={this.props.image} alt={"Image of " + this.props.name}></img>
               <p className={"card-body"}>{this.props.name}</p>
           </div>
           </div>

@@ -193,11 +193,6 @@ class SignUpForm extends Component {
             petImgForm = true;
         }
 
-        let petGenderForm = false;
-        if (petGenderValid === false && petGenderErrors !== undefined && petGenderErrors.length > 0) {
-            petGenderForm = true;
-        }
-
         let petAgeForm = false;
         if (petAgeValid === false && petAgeErrors !== undefined && petAgeErrors.length > 0) {
             petAgeForm = true;
