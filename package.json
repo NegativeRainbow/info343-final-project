@@ -6,6 +6,7 @@
     "aphrodite": "^1.2.5",
     "bootstrap": "^4.0.0-beta.2",
     "firebase": "^4.7.0",
+    "gh-pages": "^1.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.2",
@@ -15,9 +16,12 @@
     "underscore": "^1.8.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "homepage": "https://NegativeRainbow.github.io/info343-final-project/"
 }
