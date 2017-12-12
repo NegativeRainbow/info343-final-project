@@ -20,6 +20,13 @@ const styles = StyleSheet.create({
   },
   matchCard: {
     width: '100%'
+  },
+  logoImg: {
+    maxHeight: '100%',
+    maxWidth: '100%'
+  },
+  logoText: {
+    fontSize: '400%'
   }
 })
 
@@ -362,8 +369,15 @@ class App extends Component {
       <div>
         <header className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1>Woofr</h1>
-            <p>A tinder-like app for dog lovers in Seattle</p>
+            <div className="row">
+              <div className="col-md-2">
+                <img className={css(styles.logoImg)} src="./img/dogLogo.png" alt="Woofr Logo" />
+              </div>
+              <div className="col-md">
+                <h1 className={css(styles.logoText)}>Woofr</h1>
+                <p>A tinder-like app for dog lovers in Seattle</p>
+              </div>
+            </div>
           </div>
         </header>
         <main className="container">
