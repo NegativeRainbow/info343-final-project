@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
     carouselWrap: {
         backgroundColor: '#505050',
         borderRadius: '5px',
+    },
+    pulseText: {
+        textAlign: 'center'
     }
 }
 )
@@ -237,7 +240,7 @@ class Pulser extends Component {
             </div>
             <div className="profPic">
             </div>
-            <p>No More Puppers in Your Area!</p>
+            <p className={css(styles.pulseText)}>No More Puppers in Your Area!<br />Click the Icon to Refresh the Page and Load More Puppers!</p>
         </div>
         );
     }
