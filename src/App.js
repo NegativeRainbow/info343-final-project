@@ -378,7 +378,7 @@ class App extends Component {
               </div>
               <div className="col-md">
                 <h1 className={css(styles.logoText)}>Woofr</h1>
-                <p>A tinder-like app for dog lovers in Seattle</p>
+                <p>A tinder-like app for dog lovers in Seattle<br />By Gabe Bizar, Robin Yang, and Danish Bashar</p>
               </div>
             </div>
           </div>
