@@ -19,5 +19,5 @@ var config = {
     messagingSenderId: "259039318573"
   };
 firebase.initializeApp(config);
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter basename={process.env.PUBLIC_URL+'/'}><App /></BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
