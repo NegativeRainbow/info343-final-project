@@ -1,0 +1,779 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "CqQCGwEAALzdmCgLN00CGM01lXWQpaNzu9euuzMTsbf1nwOqHw6H91Acf8ffuEpQc_9w2xX1XO3_9sG5e8OYLV7nQ0XBgazKjPf07Sf26SvvWfFd_q94PkJne9LFFzmMFKbbpAWSaZzJE_Cm9XvMkQJd2vC77YaiDzambAtASMwfXx4f02rW4Q912clnvWX91izdkgpnjOTL-oEHYNlU29ycufINoLfJCj7cgXKpqwKrlxVstaODbFbdfWiPAtit3Bg6ot9vDhRYtVn8LLNcLb4ggjhQD_ADcelVaOYhiYXl5A5EtmUmT9AjhqDpGlVKr-bGBzbBPadgOkuglGUfAUbxPphq3Y3nAI1ksGe_nSZ1iFZAzPPKRqNO2zuNDgkvhl3uYZeH1xIQ4pIhjDe1YnZ-WIBwHtrdwxoUP0n2G0PRybY555kBvAo69eG_xys",
+   "results" : [
+      {
+         "formatted_address" : "9000 8th Ave SW, Seattle, WA 98106, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.52137499999999,
+               "lng" : -122.343385
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.52284018029149,
+                  "lng" : -122.3420329197085
+               },
+               "southwest" : {
+                  "lat" : 47.52014221970849,
+                  "lng" : -122.3447308802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "c622b910dfc0e3a34f74dd9e522b4ec75982352b",
+         "name" : "Westcrest Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 4000,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/100978097382646640519/photos\"\u003eWestcrest Park\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA1U2ClVzzjSUZ3mCnQGNzytTuiujzIntqq1qIS4jXFMAMukP2pNqNNBhrMHELhhErwgz77fVC1Pb7QpbvNeqtjfbmmv5wVeVFVde5moVNXtE7R5qnuYktvUxiTHXm182zEhAuYa_dXx-HGYZyyxJPvtU6GhRhchGebtYhnQ9wNb_PphprBWAjAA",
+               "width" : 6000
+            }
+         ],
+         "place_id" : "ChIJrYcj-31BkFQREeYiQ61hMvk",
+         "rating" : 4.5,
+         "reference" : "CmRSAAAAAwgB9hC7fMYk6GoRWhz0P6lwtNkA0r1zOJCJD-0ttUwuSED35DgmnfTKKpsOJOQd5V-2n_9hoIJypCyrsjWP4snW5QOxhmMqKT33CcA-I7-FhcbzYfwGJkW4HNKzUfKOEhDbauzFatqdFNWsO8ohXUqaGhRAVnQZ0X5HfBwwMomdCFEbcdDH-A",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "6046 West Lake Sammamish Pkwy NE, Redmond, WA 98052, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.658819,
+               "lng" : -122.1138673
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.6601679802915,
+                  "lng" : -122.1125183197085
+               },
+               "southwest" : {
+                  "lat" : 47.6574700197085,
+                  "lng" : -122.1152162802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "940247bdb3329c7586c2cbcf76ccd551bb5482f5",
+         "name" : "Marymoor Off-Leash Dog Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3006,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105928799682909331752/photos\"\u003eBenjamin Grant\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAbo5a2x-pfsCUr-EX1gZGxE8wkClJ7YaJA628eVapF7VxvQVnRgHWmN_hNNmQHWVSKp3_qkznjJWjYtsT_qsTIx4oF2wvuLMyI4eOW5NzVVhhdpuRx_daAxU7wio2E6OKEhC5RQnxt5yhQWRR_ryCdw4jGhRdqkewcnM-uIhvvKFazftfIBLb6A",
+               "width" : 5344
+            }
+         ],
+         "place_id" : "ChIJSzMo_Z5ykFQRhoM_LBzrPd0",
+         "rating" : 4.7,
+         "reference" : "CmRSAAAAOa2ZjIighcwdj70N7NE9xdVNJAKsIJpRAMDhWb2k0oF84mSl-_2bFXH_QJKb60wmUSfE63wLDRHjoo-wVJ2E9XWhTJhHqtxnLagOPdnSlK8SWjk9SHzAF-fj4QV8EbEmEhDjG7TNngEs5iKmecUbLTAcGhRO12FpiyOIw9SXUiEZmbq2QvEirw",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "3500 28th Ave W, Seattle, WA 98199, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.65139449999999,
+               "lng" : -122.3913367
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.65273808029149,
+                  "lng" : -122.39055775
+               },
+               "southwest" : {
+                  "lat" : 47.65004011970849,
+                  "lng" : -122.39367355
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "e7d8b48b46d4f260a6fc62da8fd7bdb29c1dcef7",
+         "name" : "Magnolia Manor Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2952,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103002993249096832412/photos\"\u003eElisha De La Cruz\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAsrRwWX87AplMnN9z6JXwHObByMirsbfP_86QGhOqlPiCrevyQ_-66HraiKL0NMTJVA14au94wjd1_rOvgYBNefLfhex20CvQZ0E9h5Sf6vzwhstkkxgT9rrxGpWWCBtAEhDcvneZx5yQQU5VVtmu-aqUGhRZAbfPDp83bc6OOrg7ilogQ_m1lQ",
+               "width" : 5248
+            }
+         ],
+         "place_id" : "ChIJU3VYlJAVkFQR_gQPJzwFf4w",
+         "rating" : 3.9,
+         "reference" : "CmRSAAAAQKqZG4WJVWAUL3EqDtQYlH8WkM2xCySfA_gZ8eyG7RUbUbk6h-KCx4sjiPy7VKfXeX__jrprg_MBFcb16K9G4H-KIVjw6dBjLv0bzFtZkimiBOucrdDbzP7TbZ5tCFTwEhA7yExWEf4Kd2ikuDGPeA8fGhT5OfB6Y_pFwLLTxiNLggF1eu-7-Q",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "15810 5th Ave SW, Burien, WA 98166, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.46115959999999,
+               "lng" : -122.341453
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.4625090302915,
+                  "lng" : -122.3403105197085
+               },
+               "southwest" : {
+                  "lat" : 47.4598110697085,
+                  "lng" : -122.3430084802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "be7f86b2c808b3694fa9a5715c16982dc6ac376b",
+         "name" : "Burien Off Leash Dog Park",
+         "photos" : [
+            {
+               "height" : 2988,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118223537491092005770/photos\"\u003eodalis de los santos\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA76KuRiTm1Sqo_mZAj6me4SKsHYe7KTstRpxWM7qn9PB1E8d0mbztV7TlQA2pYV1qJ6TwxOWIJoSFK7-8FsdQYTsmHUAPwCY5re2JXGbxQWoILAuz9JNSFlCbZ5KXOBO-EhBeRRQ2Dn_mj5I_ivk99fzPGhQ-Z_Fraq904ZemU5QbEGmBMcWpDA",
+               "width" : 5312
+            }
+         ],
+         "place_id" : "ChIJTYbqqJlEkFQR1VPqX0dNrX4",
+         "rating" : 4.3,
+         "reference" : "CmRRAAAA-P_be0wzUCmhDtb6fW3YCqLOtZ1D7wBEmqDBC95pLkAPNSPRCl-CpVWX-Yhq-H-TvenilBiDwuIwk8RJcd049s6VThY0_ymKqtPQqEpoyJKbr3hnFnjcBU6m7v1tBGIrEhDKeRBHbJgltOJlFjGodQnoGhRRCPRUpRs9s4EKeAdgFLfXCPYNbw",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "3507 S 228th St, SeaTac, WA 98198, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.397564,
+               "lng" : -122.2857043
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.39882233029149,
+                  "lng" : -122.2848217197085
+               },
+               "southwest" : {
+                  "lat" : 47.3961243697085,
+                  "lng" : -122.2875196802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "22b927bdbade489625fe9e8efa9c7187638d0a1e",
+         "name" : "Grandview Off-Leash Dog Park",
+         "photos" : [
+            {
+               "height" : 1836,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/107484817513985233101/photos\"\u003eRachyl Miller\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA2aqM_UyWEEhiAhETAosnevRnEUGaWKeFWg3dFe-d3qAo0VHYOfr91RYbrEXMPVcSMTazXgGk5ta6GZ66YpYpxIYaEkoOUj4WmcMsnNfE2qrqD-t25qIbHHsScCfWrKw0EhDmaly05Kf__cqPa0Ajz6HPGhRzP7bY-zxRBFydHmbQ-BcTnL1DLQ",
+               "width" : 3264
+            }
+         ],
+         "place_id" : "ChIJva6zWb1bkFQRo_prR-FW8mw",
+         "rating" : 4.7,
+         "reference" : "CmRRAAAAXw4atiAbyO1HjMYnQ9tXt8AIFGzvTlhDKa2j7R0DNyelGG6CnP7Kglvj09RcWo-yv3LuuA_O_whmboJ82FPectmH0Tvu2f2H3PDrcJTtX6WwPiu74jwySduFH8JWaHpWEhB5G7dY5Yqv7P-ZxZHt5_qUGhTY-sEHEL9CI-73Ujd_9nOEwq8YLw",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "6802 S Sheridan Ave, Tacoma, WA 98408, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.19700599999999,
+               "lng" : -122.4544068
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.19791988029149,
+                  "lng" : -122.45148135
+               },
+               "southwest" : {
+                  "lat" : 47.19522191970849,
+                  "lng" : -122.45538195
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "1e737259f77c58ccf41714b464d7bc4aedd8f89a",
+         "name" : "Wapato Park Off-Leash Dog Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1836,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/110793453148632674761/photos\"\u003eJamie Gillis\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAfbOcNrSStMGKjacC_KrdyliJFhnUH7XNCKmwl09lr3aYMxU4QaZO5ne2lBxdB_BmMZFKizJnkArQJa4fbOdFIv_I_J_kGuG5RUoWjQNFuJsI8ZTpw-EZayKjUxY_leuAEhAWHOuBN-1rZjvTsaF4uHTmGhSOjKY1tZb7IL5Ac4hPbKmQWtZ0Og",
+               "width" : 3264
+            }
+         ],
+         "place_id" : "ChIJv-4PpyYAkVQRfWuXQgn5Swg",
+         "rating" : 4.4,
+         "reference" : "CmRRAAAA4ToHRkw1pzQLHU5z79SwBRIi1qMKfkD32vps8IMdysNN8GudYrcKSosMty9l5Gq_m2OjkwzPXOJSKHOyQeN4hhBmnpTnXHaZLsvf0b47-bTmxy6xtJggu4TpHnCE--kiEhB6kLsJkfSRkZLGpVJ3RvTcGhSrm7jldjunK4toSKgLh879CFHmQg",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "11601 Silverdale Way NW, Silverdale, WA 98383, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.667875,
+               "lng" : -122.681866
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.6691421302915,
+                  "lng" : -122.6802063697085
+               },
+               "southwest" : {
+                  "lat" : 47.6664441697085,
+                  "lng" : -122.6829043302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "7bff23d05293129b1907edc687fb320fa5fda757",
+         "name" : "Silverdale Dog Park",
+         "photos" : [
+            {
+               "height" : 3006,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109980186278024420576/photos\"\u003eS McGhee\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAJtxXjWNd-p8z3uQxwLWWH2U6RnjNzT5wow_qgi2wfjmxqXVwDAe4RfZOVaSm2Xposa83ex1dMpzQoFKqipB4MECJ1fu94UsPFnbSBpVRwxlOsTiSnBPcHZJwfHA1bVfdEhCi5oLrK2nAAuNifYyplLH6GhTZ99fkyAYNODoRnmfson4uvagT9Q",
+               "width" : 5344
+            }
+         ],
+         "place_id" : "ChIJ7QSyg9o6kFQRUgxuhXwTYTk",
+         "rating" : 3.9,
+         "reference" : "CmRRAAAAmS6StodQN89bBdfNw__BDHurfcTWbsQvl3R7Qvxa9nt5PW1QmzOI_ZE-m1G-U0Us5CPgbdUp-Cb8bYiIJk3uHgw6VvYBdT-EgcrxnECORnvtHu2RExe6L0AObcq7ZdoTEhDq5uc0iZ9erscdN672j_7wGhTjuJ5NAI60VG3UZ9kI21SIQ_uGWw",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "320 NW Innis Arden Way, Seattle, WA 98177, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.7504805,
+               "lng" : -122.3639309
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.75146355,
+                  "lng" : -122.3628527697085
+               },
+               "southwest" : {
+                  "lat" : 47.74753135,
+                  "lng" : -122.3655507302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "ed2bcb756a0efa0b9cd336ee8a816db3c2bbc3e3",
+         "name" : "Shoreview Park Off Leash Dog Park",
+         "photos" : [
+            {
+               "height" : 2340,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/114855584468048049648/photos\"\u003eGrant Helm\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA0Bh_ZuigvKq4GFNOVtAfPJcJoix31Dkpexl74HYhab_FuSwxCYjEX3NBEswxhTAOHO4ok1fyVINTIOpkS8F95GH54jwjmo6yYgk8fpyMVpo-EXs2OpwsdsZbhhYrzp_WEhDY8Uo-CYzHy_67lCEju2-aGhQ3GEZazqnm-F-2x7Q_WkFnwnUVYA",
+               "width" : 4160
+            }
+         ],
+         "place_id" : "ChIJnbC8WMQQkFQRX1etNM2cEow",
+         "rating" : 4.3,
+         "reference" : "CmRSAAAAL8-tqfWH97C-wDquF7xmvlpjw4YVYI9J_lCZkHMVLhJw_MLuN2RppcprQyBfZuSubtzBP6z9ThiUZKC_Is1q3e1ZY4EHJDMi4gfKYbMbrfjwdFO7sUJsQylzoreRrBunEhAuOunXbpLomXsKFyeGjxniGhSr9bpyWT-cSVooA1vN1X5lBkJmTQ",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "Five mile Rd, Tacoma, WA 98407, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.3023618,
+               "lng" : -122.5325829
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.3037107802915,
+                  "lng" : -122.5312339197085
+               },
+               "southwest" : {
+                  "lat" : 47.3010128197085,
+                  "lng" : -122.5339318802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "249786154836961d4fcc8020e3b7d0fcd9028b12",
+         "name" : "Point Defiance Dog Park",
+         "photos" : [
+            {
+               "height" : 2340,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103561523068445782744/photos\"\u003eBrett Jull\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA-IKa9YY0C9-G5bxcAIA494AZYTH6lnkQzIhFCjdtmGuEFbN0--oJBeB9kI5pVS4lhFW7N5h3m6f3bcepSsbW-JpmnMuUb-1TvzQq95GiNvKK75-JssNEmHFFM78dUwKjEhDe5ITBck2JfFwcZIMN1iedGhQOcr09qgtCJbYOTHMJcTjMbMegGA",
+               "width" : 4160
+            }
+         ],
+         "place_id" : "ChIJzxyROmlTkFQR3On73a_M-LI",
+         "rating" : 3.8,
+         "reference" : "CmRSAAAA5IghQYp0-OtXPAh4vWsjCIJSL_iHytIX_cNiFh8RR-CE_JEO15b9aWkBqP_HQ9cM5hOiXoXuEHnc08-OELAaeaLvvSFHeGch5yclWHdNuPCYzpIEwt6qadGc3BlFc0RJEhDHm2W22hSwg-xmcQENkHAKGhRUAun9cloeBBoIB17sjfE4CkEo8g",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "5303 228th St SW, Mountlake Terrace, WA 98043, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.7935344,
+               "lng" : -122.3042216
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.7942969,
+                  "lng" : -122.3031610697085
+               },
+               "southwest" : {
+                  "lat" : 47.7912469,
+                  "lng" : -122.3058590302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "77cd79d93142a44108a19c7329b5164cc01253e6",
+         "name" : "Mountlake Terrace Off-Leash Dog Park",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105025267499134348459/photos\"\u003ePaul Neubert\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAATNMM0IGipVr9fneLcnhQVPVxFg9FaWXeVfya7WzWIgD6BtZImRsBM4MZMkxB-HkylaDRLAZe_k5JTcpETgd3xOKnZ_lbioTMI3NWzuuEziBA0g2f7eGQe_3CXA1qF6dNEhAe8iBMczaC2yL5o_8Com7tGhRo1Qs9dBgf4LfzXsD7H9ahKB_g5w",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJTV05twYQkFQRTtKBgzxU6qM",
+         "rating" : 4.2,
+         "reference" : "CmRSAAAAQlChKMX5s9WOjXiiXNpm7OHid75XgI2tnnCXGONP5C_5fbOigKv2tlBQQi-K1M4qX-IsW2HMG6MwV2x0XiQlCFUWl_3pEkzEdwnHsmqvRKreATGu3xk3I9A_tqALWixDEhANeL8u1oPYvHK5mUPlGGv3GhS3zKcCs56MwiFJ7BBFeE98poAOZQ",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "7400 Sand Point Way NE, Seattle, WA 98115, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.6828973,
+               "lng" : -122.2563802
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.6840566802915,
+                  "lng" : -122.2555001697085
+               },
+               "southwest" : {
+                  "lat" : 47.6813587197085,
+                  "lng" : -122.2581981302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "8765c7e9c471578ed5bca12165fa47f0e3396401",
+         "name" : "Warren G. Magnuson Park Off Leash Area",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2620,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/113939376479620400396/photos\"\u003eGabe Castillo\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA28R-NO3pJbeT69v5zIxeIpJepBnwp-nFsMmBKSkn-XVb8Cfruw6d3VtlDVfR5ZLsWNyp1lFAblT7Rw1lzT1ppy33QQrw9T7B_wL1QwzHEa6IJYp1S1DNtFx6U21MVdo0EhB-IHR20g_Mnc1nwQda2YZGGhQPnvyZo-hhcRYVaH_4SHLJr9d8jw",
+               "width" : 4656
+            }
+         ],
+         "place_id" : "ChIJi6FQmqcTkFQRy7BqppG5Q4Q",
+         "rating" : 4.7,
+         "reference" : "CmRSAAAA92Dbu3fAkRwegrd4wrZJs4uHlmAXzZt-XMzS6a9Fgom9X5KnfjXVQUKK5pX-uc3RUMowU2axEk7b3zKgEH-6FuTw7ofQlVvE5D3cHcka2JqXTFYECwXNQUQiR44VIN2HEhAKqOSVemww3uFWA-e7dYK4GhRtwF9iLKiUfGcwd_a_K0FCYH0Abg",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "11225 NE 120th St, Kirkland, WA 98034, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.706809,
+               "lng" : -122.1909261
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.70855948029151,
+                  "lng" : -122.1893235697085
+               },
+               "southwest" : {
+                  "lat" : 47.70586151970851,
+                  "lng" : -122.1920215302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "d3536fc50611681e3e56c7003671743fd8390f0c",
+         "name" : "Jasper's Dog Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3036,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/110565479391292641679/photos\"\u003eGreg Martin\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAzJiFUqfkw-s5PGenAZUbNiXHIUYUVkj3IhbdhYbqdP4IgO2GqCB4YkrwcAoFQWkOf3btckdqdp_MUjNCklgL5uFRxecNU4B-JbyWPL27c7fgr8kAV3ExGs99ZnWPrF5aEhBjW2oAvVpwERcFldvih6VZGhTL4Imn_W9z0Gx-ROHWVfx0mFkfPg",
+               "width" : 4048
+            }
+         ],
+         "place_id" : "ChIJCV9ruX4SkFQR_m_NJoeaYko",
+         "rating" : 4,
+         "reference" : "CmRRAAAAZ_Uivh7ntjsxzpl9USZAOkO7ed20y2BVyc1DkFoCb8eLv4M8RRlDPrC1I8DZAM6WPgrfLzJKqByGXNxxNLgBNv3I81v-tLLL3sHI3yfgFDrjQB43I3ADbVjp-GqmdBTyEhCBrgO9VBW6L5CUYLQX1vP9GhT6GUoYUTl7AD2lsdByTNpaDnlb1Q",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "18902 82nd St E, Bonney Lake, WA 98391, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.1827956,
+               "lng" : -122.176584
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.1841466802915,
+                  "lng" : -122.1752350197085
+               },
+               "southwest" : {
+                  "lat" : 47.1814487197085,
+                  "lng" : -122.1779329802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "59f336f7229e4c6d7b23a7d7687f2f6b3672e649",
+         "name" : "Viking Park, Off-leash Dog Park",
+         "photos" : [
+            {
+               "height" : 2121,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/115191543811351333470/photos\"\u003eJames Richardson\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAU1cG8XfQiTnFVdu7jnKfyBNlLw4Qs6ga4RtDL8eEEVYzelY028MAR-_TAdT7jogEvY83U_ok6eIDdpbrFLCwKbp0SDGmEMA8rMuo9tgSpZVihzcBvdoY7Gxc630z-j-9EhBFhIcbSs14WQ04Mlrxgiy6GhTqttRXcc06fW6l6uPyBCtquNZrIg",
+               "width" : 3771
+            }
+         ],
+         "place_id" : "ChIJNys41ff6kFQRA45YIG7QuLY",
+         "rating" : 4.6,
+         "reference" : "CmRSAAAAQxuV7IciG5j4eWamdrdXfE6ITAhzm9MSV8nYdcQ-6xhr_pirWEeTMGwX0aIaPqfCGXQOQ72oyCsHlFB7qEE3j30iWlxRWJxCVAydR3F9b1nraauXYI6jU9hyXs-pdhxxEhCkWo16Vyy8IgAlLJHMzCU5GhS8jpEsZ5Dtp5aHXGZyIuLTEczyGQ",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "1701 14th Ave NW, Gig Harbor, WA 98335, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.27787420000001,
+               "lng" : -122.5588148
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.2792215302915,
+                  "lng" : -122.5570449697085
+               },
+               "southwest" : {
+                  "lat" : 47.2765235697085,
+                  "lng" : -122.5597429302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "af510b6af433884489b76887bad55c5e6d7cc9c6",
+         "name" : "Tubby's Trail Dog Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2592,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102608222298790552161/photos\"\u003eNatalie Franz\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAlMLd3j_f9To9GkopTYzMM4RJaZQ1UpXrx7v0WIWJJd8J913Mq55U9Ia7z38v4pcU9K5NyCL2bvVs6nuTAqZiPw8BvKMnjUiXjVGwETc-4_3BCPUzj5wFtT2FxicO_DYjEhA2g6vJBlHPw6rlZLSx4GPiGhR0yDtk8GsnT6MxDWV5WQadIlihRA",
+               "width" : 4608
+            }
+         ],
+         "place_id" : "ChIJLxhYZlarkVQRY_AkzP0K_A4",
+         "rating" : 3.9,
+         "reference" : "CmRRAAAA8uS76aUOdd1pWyHB8i-rLCpEg6MGlxffhIrEh6UBcRfejtl4w7v0rSi1xg-76MGiUSrEpBDocOvsnPmcVRL3_K21S63VNSS7Q2sStxS9ld7sBueb4b8WdrwQhD8S9ZDPEhDCfw1lKe3LHLLjYDu8bP5cGhRKk7DllKOA6jBptzlaXYh4NKLdyA",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "1901 Long Lake Rd SE, Port Orchard, WA 98366, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.53166739999999,
+               "lng" : -122.5798545
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.53283618029149,
+                  "lng" : -122.5791528697085
+               },
+               "southwest" : {
+                  "lat" : 47.53013821970849,
+                  "lng" : -122.5818508302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "b655faca231f0dbdcc4ebe243bb5ef03c9dd12dc",
+         "name" : "Howe Farm County Park",
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105604199681730614792/photos\"\u003eKelly Schwab\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAlg_HqqaGmIOsDTI81MBhVRntSTSKyY_qOeaskY_vB_CQsX-54NZUWBS-3i3PccsIpd0bUGnwl51cMJLDvhXTPpC7svy31t22AL9qDHaG2LLWSkYzwSNWwrPrEw17iTCsEhDC7OTz9VZLmtSGjhDQc6f3GhR5Vtevf-QWj3bGbg5n8fTyNtP-6g",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJiajv0gNIkFQRnpY7444VW0M",
+         "rating" : 4.7,
+         "reference" : "CmRRAAAAj4dPXVHkZetYUlgdx6XhcwR7f4EoZuNaGFtTOeTXtfdDCVsJF8NwT4eobGCzs0QR5Tw-aV5bV85joLCC4UAhW0sBhPRXOZUy0ZerUf-Vxgcjr-QmuxU5jRKnR0hJuVLCEhCSD2gbGxTlTvIgHiXO0fcOGhTcNXa0dJL_xUr-MelL72adXJ_qYA",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "13390 Bandix Rd SE, Olalla, WA 98359, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.42741849999999,
+               "lng" : -122.611833
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.42875548029149,
+                  "lng" : -122.6088798
+               },
+               "southwest" : {
+                  "lat" : 47.42605751970849,
+                  "lng" : -122.6128174
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "a143769caef0b37ce7e0886520ed4b69acb5834b",
+         "name" : "Bandix Dog Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/110426638738968883699/photos\"\u003eKris King\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAynQ0NLy2Xf_Gmyo-_QVatrVnCCEowRBOKAV3TeyYyxQ_YEG2-ar5hZcB4NukNOXBtZxnZ2Hq8BdLlW9uf20itZh3EZ0ol-hWhKU3VZHsziH_Xh6StKdIJ0byf0YXibANEhBOcxCPWah7jvinBZ9mv1dhGhQcf_01Nns74amjKAS0m0TN-oXdhQ",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJ0X4bIg5MkFQRU0tAbRVto9w",
+         "rating" : 4.3,
+         "reference" : "CmRSAAAAHwvYqR6upi9b804TQHjT7pb6CA7DArWytRnaj_PQkuKZ--llmwRydeEQNof3DKfotNoETTpAgSONne-db65yb_-paxttRCeH92LRtcQ3P0Mzc0gIgbKblEtzNMJ8XeLREhAkGC64L3Lp_KeD2UWACQGlGhRcfRxJyxYPx7cubHmYY3ECNRoxmg",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "1000 N 50th St, Seattle, WA 98103, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.6701819,
+               "lng" : -122.3444762
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.67153088029149,
+                  "lng" : -122.3431272197085
+               },
+               "southwest" : {
+                  "lat" : 47.6688329197085,
+                  "lng" : -122.3458251802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "79fbe4a08f887e9453c87eb2305d496548fea543",
+         "name" : "Lower Woodland Off Leash Area",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3036,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/114201715162945781541/photos\"\u003eJeremy Leishman\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAUf_1ZMDDpaokoq6yQWfNTRY8y6aQkyIsRoSZ34hb-SGKZqQ2A6oG1u71AKM-7riAUkC-c7-SCwaznG0pSutJQMqSn31CS6xt5DiJY7bu1iAyx__dBq4IsBMAER0kxrL8EhDRBa7RETUQBeWqySjh0o9uGhS8tGslHp5McuIxN3RXqdg_NwIO_A",
+               "width" : 4048
+            }
+         ],
+         "place_id" : "ChIJDdEp4kUUkFQRYgiQJxQ7Akc",
+         "rating" : 4,
+         "reference" : "CmRRAAAANhL5BbRWNt3lAfmR1nX0VV-WJsH0BTL2gzOSrusfaKcXKntiiduXXBeqrFZxBGrqQcpXD83DP2Yu-4PXyFFn73VGjqkhLhDukUlx_T9nq1dsyQ_srvipP0Jg8GlmXWTWEhATSiEH8ME4ZfOxC9tHUM0UGhSKCwh3R0ghb9kRb9J4lT4vKaO_VA",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "12718 1st Ave NE, Seattle, WA 98125, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.7221544,
+               "lng" : -122.3257093
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.7231473802915,
+                  "lng" : -122.3246495697085
+               },
+               "southwest" : {
+                  "lat" : 47.72044941970851,
+                  "lng" : -122.3273475302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "f4e90660d93033a4dfe9d5f910c2357252539355",
+         "name" : "Northacres Off-Leash Dog Area",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2992,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103002993249096832412/photos\"\u003eElisha De La Cruz\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAIp9Y7E9R5G5QujiFgPpOD0F9qz8A9-UN8kFTQH_BAo9IhTbmAw-wUMhBvQkUkHhFI0I7yKHshTNqT8uSDp19b3llLXRK2t3px1QKuglotZFj3ZS84VHxLr7LWA7aMtrOEhCdi5WYFBf5fxyMl1pPavebGhRB-OcnJcGooT7Ug3xnaDqSzVqqyg",
+               "width" : 4000
+            }
+         ],
+         "place_id" : "ChIJm5uTNEERkFQROLUe_pnFQz0",
+         "rating" : 4.4,
+         "reference" : "CmRRAAAAXqkURfoANN74odISVTYX_8CwEymSNfMKR7NSEKRUBsNtYOORghTbxsj6LDcWi9-5WP_lABVphDRV6BHPfjeXzhSAMgO4LB2ZTXGyiLzgV1xXQnQExCJ7NbOY0iQ9WcfAEhB9z_FN2bTd0rFIaGNN92MHGhTrErmf5szEQKqaKy4U-uadVbWYXw",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "27032 79th Ave SE, Lake Stevens, WA 98258, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.97539399999999,
+               "lng" : -122.126569
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.97673538029149,
+                  "lng" : -122.1237757
+               },
+               "southwest" : {
+                  "lat" : 47.97403741970849,
+                  "lng" : -122.1275001
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "15e0056bb7de37da3770e14f0336741de0d778ae",
+         "name" : "Cavalero Hill Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/113546785536412459278/photos\"\u003eJulie Payton\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAvuJFkpYhy_BsFSZHLDlg5HTK5P48BVuBqZq9nEqipeeSSGfuXPkN_0MaoTrQSpei5LX7ALdTenN682LXRoIb1C4LMTdhb60GeWnu5seqSgJXCwoRS2ZYxkovCD6qtmDGEhA46LQRUPK22HobB88p0duEGhQv8lV0yVqbuuYsBiTZVAhh3evRzw",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJozAE2a-rmlQRnLFvWvjypBE",
+         "rating" : 4.2,
+         "reference" : "CmRRAAAA8lmsMQGcgbKxe7klNLBELQy7dDC5x2ncn4sjXekXzApeLxIQ1LaLc10N18qsgPU-Kqxw7bqjVhtlzb32dtD0Iz_OaB9Uz00gxOt-sLzGDM4ycIuplzFqvXqIUpuH5ExQEhD6uEd1BzAwVqiXknbKIUTaGhQ7VD_ZaTMPhJdFds3YWWWt2iik0w",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      },
+      {
+         "formatted_address" : "1007 12th Ave S, Seattle, WA 98144, United States",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.5923129,
+               "lng" : -122.3178459
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.5940973802915,
+                  "lng" : -122.3162168697085
+               },
+               "southwest" : {
+                  "lat" : 47.5913994197085,
+                  "lng" : -122.3189148302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "4bb50fee7a010cf934add258b4614983256d636d",
+         "name" : "Dr. Jose Rizal Park",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2448,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102717049032830374229/photos\"\u003eJim E\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAWgE7KDjXWzFQ24lNUuyuChB33a-OE49yAFS0_CV0UWJav_6GLfoNxvC5N0JrxZGtxDJ4Uwc1JsiaCqhB-HjQ0kmaIRhjy89qu6GUEHAXpL9n8JsniZFAjTjXVysPujmxEhBVa-YC0mCUS7RHCkVWZVoBGhTtPTLCUScPTeiQiyyOYZrNPXnArg",
+               "width" : 3264
+            }
+         ],
+         "place_id" : "ChIJtZua-5ZqkFQR3KHwDUT1YXk",
+         "rating" : 4.2,
+         "reference" : "CmRRAAAA5nyK3fttznNoppqXBy9WSOPsQ0LiwHg8fEZDlsNoP0cFvoeIc0ESantqKbWo641WWKEuhoC66hM74ciV6z-g5GRo7AtZZ7cZbxCYGwqwUMkyPugE7z95G1wV5Bw1WNOiEhC6xS5Aptv7JAGbpYmt689nGhQqdoGyOnCxPxJM-yrE8k_WXZ9Lmg",
+         "types" : [ "park", "point_of_interest", "establishment" ]
+      }
+   ],
+   "status" : "OK"
+}
