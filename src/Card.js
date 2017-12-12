@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: 'white',
         backgroundColor: '#FFF',
-        // borderRadius: '100%',
         background: 'url(http://web.arjentienkamp.com/codepen/tinder/heart.png)',
         backgroundSize: '30px',
         backgroundRepeat: 'no-repeat',
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         width: 50,
         height: 50,
-        // display: 'inline-block',
         boxShadow: '1px 1px 1px 0px #e9e9e9',
         outline: 1,
         margin: 'auto',
@@ -116,6 +114,8 @@ export default class Card extends Component {
             // For ease of use
             let dogObj = this.props.user.pet;
             let ownerObj = this.props.user.owner;
+
+            // Mapping images to carousel
             let petCarouselItems = dogObj.imgs.map(function (img) {
                 let obj = { src: img , altText: dogObj.name, caption: '' };
                 return obj;
@@ -129,6 +129,7 @@ export default class Card extends Component {
             content = (
                 <div className="card-flipper">
                 <div className="flip">
+                    {/* Pet Side of Card*/}
                     <div className='petSide'>
                         <div className={"card profileCardPet"}>
                             <div className={css(styles.carouselWrap)}>
@@ -167,6 +168,7 @@ export default class Card extends Component {
                             </div>
                         </div>
                     </div>
+                    {/* Owner Side of Card */}
                     <div className='ownerSide'>
                         <div className={"card profileCardOwner"}>
                             <div className={css(styles.carouselWrap)}>
@@ -224,6 +226,7 @@ export default class Card extends Component {
     }
 }
 
+// Pulser if no more to swipe on
 class Pulser extends Component {
     render() {
         return (

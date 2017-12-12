@@ -20,7 +20,11 @@ const styles = StyleSheet.create({
   },
   matchCard: {
     width: '100%'
+  },
+  matchHeading: {
+    fontSize: '32px'
   }
+  
 })
 
 
@@ -308,7 +312,7 @@ class App extends Component {
         <div className='row'>
           <div className="border col-2 px-0">
             <div className="container">
-              <h2>Matches {'<3'}</h2>
+              <p className={css(styles.matchHeading)}>Matches {'<3'}</p>
               {this.state.chatObjs.map((chat) => {
                 return <Link to={'/conversations/' + chat.number} key={chat.name}><MatchCard name={chat.name} image={chat.img}/></Link>
               })}
@@ -369,9 +373,7 @@ class App extends Component {
         <main className="container">
           {content}
         </main>
-        <footer className="container">
-          <p>By Gabe Bizar, Robin Yang, and Danish Bashar</p>
-        </footer>
+
       </div>
     );
   }
