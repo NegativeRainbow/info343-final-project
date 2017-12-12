@@ -50,6 +50,7 @@ class App extends Component {
     };
   }
 
+  /* Mounts the app to add all potential users into an array, and will filter if a user is signed in. Otherwise, it will not, but set the first card */
   componentDidMount() {
     var allUserRef = firebase.database().ref('users');
     allUserRef.once('value')
@@ -91,6 +92,7 @@ class App extends Component {
 
   }
 
+  /* Sets the state's currentUser to the person currently logged in to access their data to make chats, etc. */
   setCurrentUser() {
     firebase.database().ref('users/' + this.state.user.uid).once('value')
     .then((snapshot) => {
@@ -98,6 +100,7 @@ class App extends Component {
     });
   }
 
+  /* Filter's the current potential cards by removing the user's own card and all cards previously swiped on */
   filterFunc() {
     firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes').once('value')
       .then((snapshot) => {
@@ -122,6 +125,8 @@ class App extends Component {
           })
       });
   }
+
+  /* Set's the currently viewed card by truncating the array of potential swipes so the 0 index is pointing to the next card in the array */
   setCurrentViewNode() {
     if (this.state.potentialSwipes.length > 0) {
       var findUserRef = firebase.database().ref('users/' + this.state.potentialSwipes[0]);
@@ -134,11 +139,13 @@ class App extends Component {
     }
   }
 
+  /* Turns off listeners when the app is shut off */
   componentWillUnmount() {
     this.unregisterFunction();
     this.chatRef.off();
   }
 
+  /* Signup call back that inputs into the database based on the sign up form */
   handleSignUp(email, password, petName, petImg, petGender, petAge, petBreed, ownerName, ownerImg, ownerAge, ownerOccupation, userBio) {
     this.setState({ errorMessage: null });
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -151,7 +158,7 @@ class App extends Component {
 
   }
 
-  /* Potentially add in preferences */
+  /* Returns an object with all the associated fields */
   createUserNode(petName, petImgs, petGender, petAge, petBreed, ownerName, ownerImgs, ownerAge, ownerOccupation, userBio) {
     return {
       "pet": {
@@ -171,6 +178,7 @@ class App extends Component {
     }
   }
 
+  /* Adds the user node into the database when created */
   pushUserNode(inputUser, bio, petData, ownerData) {
     firebase.database().ref('users/' + inputUser).set({
       "bio": bio,
@@ -182,18 +190,22 @@ class App extends Component {
     })
   }
 
+  /* signIn call back that works with the inputted informations */
   handleSignIn(email, password) {
     this.setState({ errorMessage: null });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch((err) => this.setState({ errorMessage: err.message }))
 
   }
+
+  /* signout callback that removes the state */
   handleSignOut() {
     this.setState({ errorMessage: null });
     firebase.auth().signOut()
       .catch((err) => this.setState({ errorMessage: err.message }))
   }
 
+  /* Creates a conversation by pushing a conversation if the opposing user has a matching uid in their likes */
   createConversation(user2ID) {
     var countRef = firebase.database().ref('conversationCount');
     countRef.once("value")
@@ -245,6 +257,7 @@ class App extends Component {
 
   }
 
+  /* checks the likes of the inputted second user as a parameter */
   checkLikes(user2ID) {
     firebase.database().ref('users/' + user2ID +'/yesSwipes').once('value')
     .then((snapshot) =>{
@@ -254,6 +267,7 @@ class App extends Component {
     })
   }
 
+  /* the onLike callback on the like to add into the database in the user's like and then checks likes to create a conversation */
   onLike(event) {
     setTimeout(() => {
       var userYesSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/yesSwipes');
@@ -266,6 +280,7 @@ class App extends Component {
 
   }
 
+  /* onDislike callback that inputs a uid into the noSwipes in the user's database */
   onNope(event) {
     setTimeout(() => {
       var userNoSwipeRef = firebase.database().ref('users/' + this.state.user.uid + '/noSwipes');
@@ -276,9 +291,8 @@ class App extends Component {
     }, 1000);
   }
 
-
+  /* Creates objects out of all the conversations that the user has to map to components */
   matchCardMap(){
- 
     this.chatRef = firebase.database().ref('users/' + this.state.user.uid +'/chats');
     this.chatRef.on('value', (snapshot) => {
       var toMap = snapshot.val().slice(1);
@@ -286,11 +300,13 @@ class App extends Component {
     })
   }
 
+  /* callback for cards that refreshes the component for use with new items */
   cardReset(event) {
     setTimeout(() => {
       this.setState({ liked: false, disliked: false });
     }, 1000);
   }
+  
 
   render() {
     let content = null;
